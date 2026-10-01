@@ -2,6 +2,13 @@
 
 A story-led landing page using React, TypeScript, Vite, Tailwind CSS v4, and Shadcnspace with shadcn/ui Base UI primitives.
 
+## Documents and routes
+
+- `/`: The Story, Document 01.
+- `/maya-mvp-scope`: Maya MVP Scope, Document 02, including the complete scope text and all three original diagrams.
+
+Both pages share document navigation, a section contents menu, and reading progress. The Maya scope page has a companion botanical cover generated with the built-in ImageGen tool; its prompt is saved in `docs/assets/maya-mvp-cover-prompt.md`. Diagrams link to their full-size images for reading on smaller screens. `vercel.json` provides direct access and refresh support for the new route on Vercel.
+
 ## Story content
 
 The page imports `docs/01-the-story.md` directly. All story headings and paragraphs remain verbatim and in source order; only the Author's preface is excluded. The cover and three story illustrations are imported from `docs/assets/` with their original alt text. All required content is included in this repository; the production `dist/` output is self-contained.
@@ -36,6 +43,8 @@ node scripts/verify-story.mjs output/playwright/rendered-story.json
 ```
 
 The browser evidence JSON contains `blocks` (nonempty text from `[data-story-copy]`), `images` (`alt` and absolute `src` from `[data-story-image]`), `hasPreface`, `horizontalOverflow`, and `viewport`. Local screenshots and browser evidence live in the ignored `output/playwright/` directory. The current page was checked at desktop and mobile widths.
+
+For Document 02, `node scripts/verify-scope.mjs output/playwright/rendered-scope.json` checks all headings, paragraphs, captions, list items, and diagrams against the Markdown. Its browser evidence uses `[data-scope-copy]`, `[data-scope-image]`, `horizontalOverflow`, `sectionCount`, and `viewport`.
 
 ## Add components
 

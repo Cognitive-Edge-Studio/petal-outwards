@@ -1,11 +1,14 @@
-import { useEffect, useRef } from 'react'
-import { ArrowDown, ArrowUp, BookOpen, ChevronDown, Flower2, HeartHandshake, MessageCircle, GraduationCap, UserRound, FileText, SlidersHorizontal, ShieldCheck, AudioLines, Layers3 } from 'lucide-react'
+import { lazy, Suspense } from 'react'
+import { ArrowDown, ArrowRight, Flower2, HeartHandshake, MessageCircle, GraduationCap, UserRound, FileText, SlidersHorizontal, ShieldCheck, AudioLines, Layers3 } from 'lucide-react'
 import type { StorySection } from '@/content/story'
 import { coverMarkdown, sections, storyTitle } from '@/content/story'
 import { StoryContent } from '@/components/story/StoryContent'
 import AnimatedBorderButton from '@/components/shadcn-space/button/button-06'
 import { useStoryMotion } from '@/hooks/use-story-motion'
+import { DocumentFooter, DocumentHeader } from '@/components/DocumentNavigation'
 import './story.css'
+
+const ScopePage = lazy(() => import('./ScopePage'))
 
 function ChapterHeading({ section, index }: { section: StorySection; index: number }) {
   return (
@@ -22,46 +25,6 @@ function Blocks({ blocks, className = '' }: { blocks: string[]; className?: stri
       <StoryContent markdown={block} />
     </div>
   ))
-}
-
-function Contents() {
-  const details = useRef<HTMLDetailsElement>(null)
-  useEffect(() => {
-    const closeOutside = (event: PointerEvent) => {
-      if (event.target instanceof Node && !details.current?.contains(event.target)) {
-        details.current?.removeAttribute('open')
-      }
-    }
-    const closeEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && details.current?.open) {
-        details.current.removeAttribute('open')
-        details.current.querySelector('summary')?.focus()
-      }
-    }
-    document.addEventListener('pointerdown', closeOutside)
-    document.addEventListener('keydown', closeEscape)
-    return () => {
-      document.removeEventListener('pointerdown', closeOutside)
-      document.removeEventListener('keydown', closeEscape)
-    }
-  }, [])
-
-  return (
-    <details className="contents" ref={details}>
-      <summary><BookOpen size={16} aria-hidden="true" /><span>Contents</span><ChevronDown size={14} className="contents-chevron" aria-hidden="true" /></summary>
-      <nav className="contents-panel" aria-label="Story chapters">
-        <ol>
-          {sections.map((section, index) => (
-            <li key={section.id}>
-              <a href={`#${section.id}`} onClick={() => details.current?.removeAttribute('open')}>
-                <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{section.title}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
-    </details>
-  )
 }
 
 function Chapter({ section, index }: { section: StorySection; index: number }) {
@@ -177,20 +140,14 @@ function Chapter({ section, index }: { section: StorySection; index: number }) {
   )
 }
 
-function App() {
+function StoryPage() {
   useStoryMotion()
   const opening = sections[0]
 
   return (
     <div className="story-site">
       <a className="skip-link" href="#main">Skip to story</a>
-      <header className="site-header">
-        <div className="reading-progress" aria-hidden="true" />
-        <div className="page-width header-inner">
-          <a href="#top" className="wordmark" aria-label="Petal, back to top"><Flower2 size={30} strokeWidth={1.4} aria-hidden="true" /><span>petal<span className="wordmark-dot">.</span></span></a>
-          <div className="header-right"><span className="header-story">{storyTitle}</span><span className="header-divider" aria-hidden="true" /><Contents /></div>
-        </div>
-      </header>
+      <DocumentHeader active="story" entries={sections} />
 
       <main id="main">
         <section className="hero page-width" id={opening.id}>
@@ -217,13 +174,23 @@ function App() {
         </div>
 
         {sections.slice(1).map((section, index) => <Chapter key={section.id} section={section} index={index + 1} />)}
+        <div className="next-document dark-chapter">
+          <a href="/maya-mvp-scope" className="page-width next-document-link"><span><small>CONTINUE TO DOCUMENT 02</small>Maya MVP Scope</span><ArrowRight size={28} strokeWidth={1.2} aria-hidden="true" /></a>
+        </div>
       </main>
 
-      <footer className="site-footer dark-chapter">
-        <div className="page-width footer-inner"><a href="#top" className="wordmark" aria-label="Petal, back to top"><Flower2 size={26} strokeWidth={1.4} aria-hidden="true" /><span>petal<span className="wordmark-dot">.</span></span></a><a href="#top" className="back-top">Back to top<ArrowUp size={16} aria-hidden="true" /></a></div>
-      </footer>
+      <DocumentFooter />
     </div>
   )
+}
+
+function App() {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  if (path === '/maya-mvp-scope') {
+    return <Suspense fallback={<div className="page-width route-loading" role="status">Opening Maya MVP Scope…</div>}><ScopePage /></Suspense>
+  }
+  if (path === '/') return <StoryPage />
+  return <main className="page-width route-loading"><h1>Page not found</h1><a href="/">Return to the story</a></main>
 }
 
 export default App

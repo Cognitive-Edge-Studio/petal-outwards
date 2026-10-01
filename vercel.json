@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/maya-mvp-scope", "destination": "/index.html" },
+    { "source": "/maya-mvp-scope/", "destination": "/index.html" }
+  ]
+}
