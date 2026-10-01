@@ -1,6 +1,6 @@
 # Maya MVP Scope
 
-Status: Confirmed Session 2 product scope. Technical design, measured performance targets, and pilot results belong to later work.
+Status: Confirmed Session 2 product scope, extended on 1 October 2026 by the user's request to include a bounded self-improving loop in the MVP. Detailed loop design and operating parameters remain proposals; measured performance and pilot results require implementation evidence.
 
 ## Purpose and sequence
 
@@ -34,6 +34,7 @@ The first Maya implementation must support:
 - Unknown answers: when approved information does not support a service fact, Maya says she cannot confirm it and hands the question to the owner rather than guessing.
 - Human handoff: when Maya needs review, she acknowledges the request promptly and pauses replies in that conversation. The owner can inspect the context, act, and explicitly return control to Maya. Maya must not send a competing reply while the owner has control.
 - A reviewable record of what Maya answered, proposed, shared, or escalated, and which persona configuration and authority applied.
+- A bounded self-improving loop: capture verified feedback, identify supported gaps, draft a small knowledge, instruction, or allowlisted persona retrieval change, and evaluate it against the current configuration. The represented person reviews the exact tested change and explicitly approves and publishes it; retrieval tuning also needs engineering review. Observe later outcomes and support restoring a still-valid earlier approved version. Private client facts cannot become general knowledge through this process. Document 07, Self-Improving Loop: Design and MVP Scope, defines the proposed mechanisms and gates.
 
 The first validation can use the text-based testing interface without WhatsApp.
 
@@ -53,6 +54,7 @@ Test two distinct personas in general professional and teaching scenarios, with 
 - Acknowledges and hands off a request that needs the owner, then stops replying until control is returned.
 - Leaves an inspectable record of the response or action and the configuration that governed it.
 - Applies only a published, owner-approved persona version in live conversations and can restore the previous version.
+- Completes a synthetic feedback-to-improvement cycle for both validation personas: a supported gap, bounded candidate, paired tests, explicit owner approval/publication, later use, observation decision, and restore exercise. Failed gates or stale evidence must block adoption; the test interface can prove the loop before Petal exists.
 
 The ambition to handle roughly 100 simultaneous conversations for one persona is a separate capacity gate before a Petal pilot. Functional behavior comes first; representative load testing and acceptable response times will be specified in the delivery plan. Neither gate prevents documenting Petal's product requirements in the next session.
 

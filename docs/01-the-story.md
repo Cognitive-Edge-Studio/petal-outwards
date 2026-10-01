@@ -88,7 +88,7 @@ A professional can improve Maya by correcting information, refining instructions
 
 ![A professional extending her presence](assets/maya-evolving-presence.png)
 
-A future version could help identify recurring difficulties and propose improvements, such as asking for a commonly missed detail earlier. How such proposals are evaluated and adopted remains open. Whether Maya may change core beliefs is a separate question that has been deferred.
+The MVP includes a bounded improvement loop: Maya identifies recurring difficulties, proposes a small change, and tests it against the current configuration. The professional reviews the evidence and approves and publishes the exact change before it affects client conversations. Later outcomes help them decide whether to retain, revise, or restore the previous valid approved version. For example, Maya could suggest asking for a commonly missed detail earlier. Private client facts stay within their relationships, and changes to core beliefs remain deferred.
 
 For clients, the intended value is a more responsive relationship with continuity and less repeated explanation. For professionals, it is more room to focus on work that needs their judgment, while routine communication and permitted preparation continue. Time savings and business growth would need to be demonstrated through actual use.
 
