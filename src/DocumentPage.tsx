@@ -33,7 +33,7 @@ const pageDetails = {
   improvement: {
     description: 'Maya and Petal self-improving loop: scoped feedback, protected evidence, bounded candidates, isolated tests, and explicit owner publication.',
     previous: { href: '/system-design', number: '06', title: 'System Design' },
-    next: null,
+    next: { href: '/developer-docs', number: '08', title: 'Developer Docs' },
   },
 }
 

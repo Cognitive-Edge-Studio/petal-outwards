@@ -11,6 +11,8 @@
     { "source": "/system-design", "destination": "/index.html" },
     { "source": "/system-design/", "destination": "/index.html" },
     { "source": "/self-improving-loop", "destination": "/index.html" },
-    { "source": "/self-improving-loop/", "destination": "/index.html" }
+    { "source": "/self-improving-loop/", "destination": "/index.html" },
+    { "source": "/developer-docs", "destination": "/index.html" },
+    { "source": "/developer-docs/", "destination": "/index.html" }
   ]
 }

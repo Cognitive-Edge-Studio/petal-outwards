@@ -11,6 +11,7 @@ import './story.css'
 
 const ScopePage = lazy(() => import('./ScopePage'))
 const DocumentPage = lazy(() => import('./DocumentPage'))
+const DeveloperDocsPage = lazy(() => import('./DeveloperDocsPage'))
 const documentPages: Record<string, DocumentId> = {
   '/petal-mvp-scope': 'petal',
   '/technical-architecture': 'architecture',
@@ -195,6 +196,9 @@ function StoryPage() {
 
 function App() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  if (path === '/developer-docs') {
+    return <Suspense fallback={<div className="page-width route-loading" role="status">Opening developer docs…</div>}><DeveloperDocsPage /></Suspense>
+  }
   if (documentPages[path]) {
     return <Suspense fallback={<div className="page-width route-loading" role="status">Opening document…</div>}><DocumentPage documentId={documentPages[path]} /></Suspense>
   }

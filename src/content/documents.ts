@@ -3,6 +3,7 @@ import architectureSource from '../../docs/04-technical-architecture-and-enginee
 import roadmapSource from '../../docs/05-implementation-roadmap-pilot-plan-and-launch-criteria.md?raw'
 import systemDesignSource from '../../docs/06-system-design-document.md?raw'
 import improvementSource from '../../docs/07-self-improving-loop-design-and-mvp-scope.md?raw'
+import developerSource from '../../docs/08-maya-developer-docs.md?raw'
 
 export type DocumentId = 'petal' | 'architecture' | 'roadmap' | 'system-design' | 'improvement'
 export const documentRoutes: Record<string, string> = {
@@ -13,6 +14,7 @@ export const documentRoutes: Record<string, string> = {
   '05-implementation-roadmap-pilot-plan-and-launch-criteria.md': '/implementation-roadmap',
   '06-system-design-document.md': '/system-design',
   '07-self-improving-loop-design-and-mvp-scope.md': '/self-improving-loop',
+  '08-maya-developer-docs.md': '/developer-docs',
 }
 const files = import.meta.glob('../../docs/**/*.md', { eager: true, query: '?url', import: 'default' }) as Record<string, string>
 const documentSourceAliases: Record<string, string> = {
@@ -66,6 +68,8 @@ function parseDocument(source: string) {
     }),
   }
 }
+
+export const developerDocument = parseDocument(developerSource)
 
 export const documents = {
   petal: { ...parseDocument(petalSource), number: '03', label: 'THE CLIENT EXPERIENCE', file: '03-petal-product-requirements-and-mvp-scope.md' },
