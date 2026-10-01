@@ -259,3 +259,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   .conversation-heading { position: static; }
   .hero-art img { height: auto; max-height: 400px; object-fit: contain; }
 }
+
+/* Document links stay accessible in a second header row on small screens. */
+@media (max-width: 1100px) {
+  .header-inner { flex-wrap: wrap; height: auto; gap: 0; padding-block: 14px 10px; }
+  .header-inner > .wordmark { order: 0; }
+  .header-inner > .contents { order: 1; margin-left: auto; }
+  .header-inner > .document-nav { order: 2; width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+  .document-nav a { font-size: 11px; padding: 8px 10px; gap: 5px; }
+  .document-nav a[aria-current='page'] { display: flex; }
+  .document-nav a > span { display: inline; }
+}
+@media (max-width: 400px) {
+  .document-nav a { font-size: 10px; padding: 7px 5px; }
+  .document-nav a > span { display: none; }
+}

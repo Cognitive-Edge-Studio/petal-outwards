@@ -1,6 +1,16 @@
 {
   "rewrites": [
     { "source": "/maya-mvp-scope", "destination": "/index.html" },
-    { "source": "/maya-mvp-scope/", "destination": "/index.html" }
+    { "source": "/maya-mvp-scope/", "destination": "/index.html" },
+    { "source": "/petal-mvp-scope", "destination": "/index.html" },
+    { "source": "/petal-mvp-scope/", "destination": "/index.html" },
+    { "source": "/technical-architecture", "destination": "/index.html" },
+    { "source": "/technical-architecture/", "destination": "/index.html" },
+    { "source": "/implementation-roadmap", "destination": "/index.html" },
+    { "source": "/implementation-roadmap/", "destination": "/index.html" },
+    { "source": "/system-design", "destination": "/index.html" },
+    { "source": "/system-design/", "destination": "/index.html" },
+    { "source": "/self-improving-loop", "destination": "/index.html" },
+    { "source": "/self-improving-loop/", "destination": "/index.html" }
   ]
 }

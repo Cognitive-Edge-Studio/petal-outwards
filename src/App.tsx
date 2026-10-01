@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { ArrowDown, ArrowRight, Flower2, HeartHandshake, MessageCircle, GraduationCap, UserRound, FileText, SlidersHorizontal, ShieldCheck, AudioLines, Layers3 } from 'lucide-react'
 import type { StorySection } from '@/content/story'
+import type { DocumentId } from '@/content/documents'
 import { coverMarkdown, sections, storyTitle } from '@/content/story'
 import { StoryContent } from '@/components/story/StoryContent'
 import AnimatedBorderButton from '@/components/shadcn-space/button/button-06'
@@ -9,6 +10,14 @@ import { DocumentFooter, DocumentHeader } from '@/components/DocumentNavigation'
 import './story.css'
 
 const ScopePage = lazy(() => import('./ScopePage'))
+const DocumentPage = lazy(() => import('./DocumentPage'))
+const documentPages: Record<string, DocumentId> = {
+  '/petal-mvp-scope': 'petal',
+  '/technical-architecture': 'architecture',
+  '/implementation-roadmap': 'roadmap',
+  '/system-design': 'system-design',
+  '/self-improving-loop': 'improvement',
+}
 
 function ChapterHeading({ section, index }: { section: StorySection; index: number }) {
   return (
@@ -186,6 +195,9 @@ function StoryPage() {
 
 function App() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  if (documentPages[path]) {
+    return <Suspense fallback={<div className="page-width route-loading" role="status">Opening document…</div>}><DocumentPage documentId={documentPages[path]} /></Suspense>
+  }
   if (path === '/maya-mvp-scope') {
     return <Suspense fallback={<div className="page-width route-loading" role="status">Opening Maya MVP Scope…</div>}><ScopePage /></Suspense>
   }

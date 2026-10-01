@@ -44,7 +44,7 @@ function Contents({ entries, label }: { entries: DocumentEntry[]; label: string 
   )
 }
 
-export function DocumentHeader({ active, entries }: { active: 'story' | 'scope'; entries: DocumentEntry[] }) {
+export function DocumentHeader({ active, entries }: { active: 'story' | 'scope' | 'petal' | 'architecture' | 'roadmap' | 'system-design' | 'improvement'; entries: DocumentEntry[] }) {
   return (
     <header className="site-header">
       <div className="reading-progress" aria-hidden="true" />
@@ -53,8 +53,13 @@ export function DocumentHeader({ active, entries }: { active: 'story' | 'scope';
         <nav className="document-nav" aria-label="Documents">
           <a href="/" aria-current={active === 'story' ? 'page' : undefined}><span aria-hidden="true">01</span>The story</a>
           <a href="/maya-mvp-scope" aria-current={active === 'scope' ? 'page' : undefined}><span aria-hidden="true">02</span>Maya MVP</a>
+          <a href="/petal-mvp-scope" aria-current={active === 'petal' ? 'page' : undefined}><span aria-hidden="true">03</span>Petal MVP</a>
+          <a href="/technical-architecture" aria-current={active === 'architecture' ? 'page' : undefined}><span aria-hidden="true">04</span>Architecture</a>
+          <a href="/implementation-roadmap" aria-current={active === 'roadmap' ? 'page' : undefined}><span aria-hidden="true">05</span>Roadmap</a>
+          <a href="/system-design" aria-current={active === 'system-design' ? 'page' : undefined}><span aria-hidden="true">06</span>System design</a>
+          <a href="/self-improving-loop" aria-current={active === 'improvement' ? 'page' : undefined}><span aria-hidden="true">07</span>Improvement</a>
         </nav>
-        <Contents entries={entries} label={active === 'story' ? 'Story chapters' : 'Maya scope sections'} />
+        <Contents entries={entries} label={active === 'story' ? 'Story chapters' : 'Document sections'} />
       </div>
     </header>
   )
