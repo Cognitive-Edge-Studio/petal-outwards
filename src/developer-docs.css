@@ -15,21 +15,9 @@
 .developer-quick-links a { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .developer-quick-links strong { font-size: 13px; font-weight: 500; }
 .developer-quick-links small { display: block; color: var(--copy); font-size: 11px; line-height: 1.7; margin-top: 6px; }
-.developer-quick-links svg, .developer-related svg { flex-shrink: 0; color: var(--coral); }
+.developer-quick-links svg { flex-shrink: 0; color: var(--coral); }
 .developer-quick-links a:hover strong { color: var(--coral); }
-.developer-layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 64px; padding-block: 56px 64px; align-items: start; }
-.developer-sidebar { position: sticky; top: 116px; max-height: calc(100dvh - 140px); overflow-y: auto; padding: 6px; margin: -6px; }
-.developer-search-label { display: block; color: var(--copy); font-size: 12px; margin-bottom: 10px; }
-.developer-search { display: flex; align-items: center; gap: 9px; border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: #fffdf8; }
-.developer-search:focus-within { outline: 2px solid var(--coral); outline-offset: 2px; }
-.developer-search svg { flex-shrink: 0; color: var(--copy); }
-.developer-search input { min-width: 0; width: 100%; background: none; border: 0; outline: none; color: var(--ink); font: inherit; font-size: 12px; }
-.developer-search-status { font-size: 10px; letter-spacing: 1px; color: var(--copy); margin: 26px 0 14px; }
-.developer-sidebar ol { list-style: none; margin: 0; padding: 0; }
-.developer-sidebar li a { display: block; padding: 9px 12px; border-left: 1px solid var(--line); font-size: 12px; line-height: 1.6; color: var(--copy); }
-.developer-sidebar li a:hover, .developer-sidebar li a:focus-visible { color: var(--ink); background: #eff0e7; border-left-color: var(--coral); }
-.developer-related { display: flex; align-items: center; gap: 10px; font-size: 11px; padding-top: 22px; margin-top: 20px; border-top: 1px solid var(--line); }
-.developer-empty { font-size: 12px; line-height: 1.7; color: var(--copy); }
+.developer-layout { padding-block: 56px 64px; }
 .developer-body { min-width: 0; }
 .developer-status { padding: 24px; background: #eff0e7; border: 1px solid var(--line); border-radius: 10px; }
 .developer-status > span { display: block; font-size: 9px; letter-spacing: 1.6px; color: var(--copy); margin-bottom: 14px; }
@@ -43,10 +31,7 @@
 .developer-site .document-content table { font-size: 12px; }
 .developer-site .document-content th, .developer-site .document-content td { padding: 14px; }
 @media (max-width: 1250px) {
-  .developer-sidebar { top: 156px; max-height: calc(100dvh - 180px); }
-  .developer-section { scroll-margin-top: 65px; }
   .developer-hero-heading { gap: 40px; }
-  .developer-layout { gap: 36px; grid-template-columns: 210px minmax(0, 1fr); }
 }
 @media (max-width: 800px) {
   .developer-hero { padding-top: 36px; }
@@ -54,19 +39,14 @@
   .developer-hero h1 { font-size: clamp(48px, 8vw, 70px); letter-spacing: -2.5px; }
   .developer-stack { padding: 24px; }
   .developer-quick-links { grid-template-columns: 1fr; gap: 22px; margin-top: 32px; }
-  .developer-layout { grid-template-columns: 1fr; gap: 32px; padding-top: 32px; }
-  .developer-sidebar { position: static; max-height: none; }
-  .developer-sidebar ol { display: grid; grid-template-columns: 1fr 1fr; }
+  .developer-layout { padding-top: 32px; }
   .developer-site .document-content pre { padding: 18px; font-size: 11px; }
-  .developer-section { scroll-margin-top: 75px; }
 }
 @media (max-width: 440px) {
-  .developer-sidebar ol { grid-template-columns: 1fr; }
   .developer-status { padding: 18px; }
-  .developer-section { scroll-margin-top: 100px; }
 }
 @media print {
-  .developer-sidebar, .developer-quick-links, .developer-hero .scope-cta { display: none; }
+  .developer-quick-links, .developer-hero .scope-cta { display: none; }
   .developer-hero-heading, .developer-layout { display: block; }
   .developer-section { padding-block: 20px; }
   .developer-site .document-content pre { white-space: pre-wrap; overflow-wrap: anywhere; background: white; color: black; border-color: #ddd; }

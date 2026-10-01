@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react'
-import { ArrowUp, BookOpen, Check, ChevronDown, Files, Flower2 } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowUp, BookOpen, ChevronDown, ChevronLeft, ChevronRight, Flower2, Search } from 'lucide-react'
 
-export type DocumentEntry = { id: string; title: string }
+export type DocumentEntry = { id: string; title: string; markdown?: string }
 
 const documentLinks = [
   { id: 'story', href: '/', number: '01', label: 'The story' },
@@ -16,100 +16,159 @@ const documentLinks = [
 
 type ActiveDocument = typeof documentLinks[number]['id']
 
-function useMenuDismissal() {
-  const details = useRef<HTMLDetailsElement>(null)
+function Documents({ active }: { active: ActiveDocument }) {
+  const nav = useRef<HTMLElement>(null)
+  const [scroll, setScroll] = useState({ overflow: false, previous: false, next: false })
 
   useEffect(() => {
-    const closeOutside = (event: PointerEvent) => {
-      if (event.target instanceof Node && !details.current?.contains(event.target)) {
-        details.current?.removeAttribute('open')
-      }
+    const element = nav.current!
+    const update = () => {
+      const overflow = element.scrollWidth > element.clientWidth + 1
+      const previous = element.scrollLeft > 1
+      const next = element.scrollLeft + element.clientWidth < element.scrollWidth - 1
+      setScroll(current => current.overflow === overflow && current.previous === previous && current.next === next ? current : { overflow, previous, next })
     }
-    const closeEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && details.current?.open) {
-        details.current.removeAttribute('open')
-        details.current.querySelector('summary')?.focus()
-      }
+    const revealCurrent = () => {
+      const link = element.querySelector<HTMLElement>('[aria-current="page"]')
+      if (link) element.scrollLeft = link.offsetLeft - (element.clientWidth - link.offsetWidth) / 2
+      update()
     }
-    const closeOtherMenus = () => {
-      if (details.current?.open) {
-        details.current.closest('header')?.querySelectorAll('details[open]').forEach(menu => {
-          if (menu !== details.current) menu.removeAttribute('open')
-        })
-      }
-    }
-    const menu = details.current
-    menu?.addEventListener('toggle', closeOtherMenus)
-    document.addEventListener('pointerdown', closeOutside)
-    document.addEventListener('keydown', closeEscape)
+    const observer = new ResizeObserver(revealCurrent)
+    observer.observe(element)
+    element.addEventListener('scroll', update, { passive: true })
+    let mounted = true
+    document.fonts.ready.then(() => { if (mounted) revealCurrent() })
+    revealCurrent()
     return () => {
-      menu?.removeEventListener('toggle', closeOtherMenus)
-      document.removeEventListener('pointerdown', closeOutside)
-      document.removeEventListener('keydown', closeEscape)
+      mounted = false
+      observer.disconnect()
+      element.removeEventListener('scroll', update)
     }
-  }, [])
+  }, [active])
 
-  return details
-}
+  const move = (direction: number) => nav.current?.scrollBy({ left: direction * nav.current.clientWidth * .7, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
 
-function Documents({ active }: { active: ActiveDocument }) {
-  const details = useMenuDismissal()
-  const current = documentLinks.find(document => document.id === active)!
-
-  return <details className="document-switcher" ref={details}>
-    <summary aria-label={'Documents, current document: ' + current.label}>
-      <Files size={16} aria-hidden="true" />
-      <span className="document-menu-current"><span className="document-menu-number">{current.number}</span>{current.label}</span>
-      <span className="document-menu-label">Documents</span>
-      <ChevronDown size={14} className="contents-chevron" aria-hidden="true" />
-    </summary>
-    <nav className="document-menu-panel" aria-label="Documents">
-      <span className="document-menu-heading">Project documents</span>
-      <ol>{documentLinks.map(document => <li key={document.id}>
-        <a href={document.href} aria-current={active === document.id ? 'page' : undefined} onClick={() => details.current?.removeAttribute('open')}>
-          <span className="document-menu-number" aria-hidden="true">{document.number}</span>
-          <span>{document.label}</span>
-          {active === document.id && <Check size={16} aria-hidden="true" />}
+  return <div className="document-nav-shell">
+    <button className="route-scroll" hidden={!scroll.overflow} disabled={!scroll.previous} onClick={() => move(-1)} aria-label="Show previous documents"><ChevronLeft size={16} aria-hidden="true" /></button>
+    <nav className="document-nav" aria-label="Documents" ref={nav}>
+      {documentLinks.map(document => (
+        <a key={document.id} href={document.href} aria-current={active === document.id ? 'page' : undefined}>
+          <span aria-hidden="true">{document.number}</span>{document.label}
         </a>
-      </li>)}</ol>
+      ))}
     </nav>
-  </details>
+    <button className="route-scroll" hidden={!scroll.overflow} disabled={!scroll.next} onClick={() => move(1)} aria-label="Show next documents"><ChevronRight size={16} aria-hidden="true" /></button>
+  </div>
 }
 
-function Contents({ entries, label }: { entries: DocumentEntry[]; label: string }) {
-  const details = useMenuDismissal()
+function ReadingContents({ entries, searchable }: { entries: DocumentEntry[]; searchable: boolean }) {
+  const [visible, setVisible] = useState(false)
+  const [current, setCurrent] = useState(entries[0]?.id)
+  const [compact, setCompact] = useState(() => window.matchMedia('(max-width: 1100px)').matches)
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const list = useRef<HTMLOListElement>(null)
+  const toggle = useRef<HTMLButtonElement>(null)
+  const activeIndex = Math.max(0, entries.findIndex(entry => entry.id === current))
+  const normalizedQuery = query.trim().toLowerCase()
+  const matches = entries.filter(entry => `${entry.title} ${entry.markdown ?? ''}`.toLowerCase().includes(normalizedQuery))
 
-  return (
-    <details className="contents" ref={details}>
-      <summary><BookOpen size={16} aria-hidden="true" /><span>Contents</span><ChevronDown size={14} className="contents-chevron" aria-hidden="true" /></summary>
-      <nav className="contents-panel" aria-label={label}>
-        <ol>
-          {entries.map((entry, index) => (
-            <li key={entry.id}>
-              <a href={`#${entry.id}`} onClick={() => details.current?.removeAttribute('open')}>
-                <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{entry.title}
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
-    </details>
-  )
+  useEffect(() => {
+    const hero = document.querySelector<HTMLElement>('main > .scope-hero, main > .hero, main > .developer-hero')
+    const main = document.querySelector('main')
+    const sections = entries.map(entry => document.getElementById(entry.id))
+    const media = window.matchMedia('(max-width: 1100px)')
+    const updateCompact = () => { setCompact(media.matches); setOpen(false) }
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height ?? 86
+      setVisible(!!hero && hero.getBoundingClientRect().bottom <= headerHeight + 64 && (main?.getBoundingClientRect().bottom ?? 0) > headerHeight + 160)
+      let index = 0
+      sections.forEach((section, candidate) => {
+        if (section && section.getBoundingClientRect().top <= headerHeight + 160) index = candidate
+      })
+      setCurrent(entries[index]?.id)
+    }
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update) }
+    const observer = new ResizeObserver(schedule)
+    if (main) observer.observe(main)
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    media.addEventListener('change', updateCompact)
+    update()
+    return () => {
+      cancelAnimationFrame(frame)
+      observer.disconnect()
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      media.removeEventListener('change', updateCompact)
+    }
+  }, [entries])
+
+  useEffect(() => {
+    const active = list.current?.querySelector<HTMLElement>('[aria-current="location"]')
+    if (active && list.current && !normalizedQuery) {
+      const viewport = list.current.getBoundingClientRect()
+      const item = active.getBoundingClientRect()
+      if (item.top < viewport.top || item.bottom > viewport.bottom) list.current.scrollTop += item.top - viewport.top - viewport.height / 3
+    }
+  }, [current, visible, open, normalizedQuery])
+
+  useEffect(() => {
+    if (!open) return
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setOpen(false); toggle.current?.focus() }
+    }
+    document.addEventListener('keydown', escape)
+    return () => document.removeEventListener('keydown', escape)
+  }, [open])
+
+  if (!visible) return null
+
+  return <aside className={`reading-contents ${open ? 'reading-contents-open' : ''}`} aria-label="Reading guide">
+    <div className="reading-contents-heading"><BookOpen size={15} aria-hidden="true" /><span>ON THIS PAGE</span><span>{String(activeIndex + 1).padStart(2, '0')} / {String(entries.length).padStart(2, '0')}</span></div>
+    {compact ? <button ref={toggle} className="reading-contents-toggle" onClick={() => setOpen(value => !value)} aria-expanded={open} aria-controls="reading-sections"><span>Contents</span><ChevronDown size={16} aria-hidden="true" /></button> : <h2 className="reading-contents-toggle">Contents</h2>}
+    <p className="reading-current">{entries[activeIndex]?.title}</p>
+    <nav className="reading-sections" id="reading-sections" aria-label="Document sections">
+      {searchable && <label className="reading-search"><Search size={14} aria-hidden="true" /><input type="search" placeholder="Find a section…" aria-label="Find a section" value={query} onChange={event => setQuery(event.target.value)} /></label>}
+      {normalizedQuery && <p className="reading-search-status" role="status">{matches.length} matching {matches.length === 1 ? 'section' : 'sections'}</p>}
+      <ol ref={list}>
+        {matches.map(entry => <li key={entry.id}><a href={`#${entry.id}`} aria-current={current === entry.id ? 'location' : undefined} onClick={() => { setCurrent(entry.id); setOpen(false); if (compact) toggle.current?.focus({ preventScroll: true }) }}><span aria-hidden="true">{String(entries.indexOf(entry) + 1).padStart(2, '0')}</span>{entry.title}</a></li>)}
+      </ol>
+      {matches.length === 0 && <p className="reading-search-status">No matching sections.</p>}
+    </nav>
+  </aside>
 }
 
 export function DocumentHeader({ active, entries }: { active: ActiveDocument; entries: DocumentEntry[] }) {
-  return (
-    <header className="site-header">
+  const header = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (header.current) {
+        document.documentElement.style.setProperty('--document-header-height', `${header.current.getBoundingClientRect().height}px`)
+      }
+    }
+    const observer = new ResizeObserver(updateHeight)
+    if (header.current) observer.observe(header.current)
+    updateHeight()
+    return () => {
+      observer.disconnect()
+      document.documentElement.style.removeProperty('--document-header-height')
+    }
+  }, [])
+
+  return <>
+    <header className="site-header" ref={header}>
       <div className="reading-progress" aria-hidden="true" />
       <div className="page-width header-inner">
         <a href="/" className="wordmark" aria-label="Petal, the story"><Flower2 size={30} strokeWidth={1.4} aria-hidden="true" /><span>petal<span className="wordmark-dot">.</span></span></a>
-        <div className="header-menus">
-          <Documents active={active} />
-          <Contents entries={entries} label={active === 'story' ? 'Story chapters' : 'Document sections'} />
-        </div>
+        <Documents active={active} />
       </div>
     </header>
-  )
+    <ReadingContents entries={entries} searchable={active === 'developer'} />
+  </>
 }
 
 export function DocumentFooter() {

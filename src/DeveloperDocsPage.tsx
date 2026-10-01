@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { ArrowDown, ArrowLeft, ArrowRight, Code2, Search } from 'lucide-react'
+import { useEffect } from 'react'
+import { ArrowDown, ArrowLeft, ArrowRight, Code2 } from 'lucide-react'
 import { DocumentFooter, DocumentHeader } from '@/components/DocumentNavigation'
 import { DocumentContent } from '@/components/DocumentContent'
 import { developerDocument } from '@/content/documents'
@@ -15,11 +15,6 @@ const quickLinks = [
 ]
 
 export default function DeveloperDocsPage() {
-  const [query, setQuery] = useState('')
-  const normalizedQuery = query.trim().toLowerCase()
-  const matches = developerDocument.sections.filter(section =>
-    `${section.title} ${section.markdown}`.toLowerCase().includes(normalizedQuery),
-  )
   useStoryMotion()
 
   useEffect(() => {
@@ -61,20 +56,6 @@ export default function DeveloperDocsPage() {
       </section>
 
       <div className="developer-layout page-width">
-        <aside className="developer-sidebar" aria-label="Developer docs section index">
-          <label className="developer-search-label" htmlFor="developer-search">Find a section</label>
-          <div className="developer-search">
-            <Search size={16} aria-hidden="true" />
-            <input id="developer-search" type="search" placeholder="Search the docs…" value={query} onChange={event => setQuery(event.target.value)} />
-          </div>
-          <p className="developer-search-status" role="status">{normalizedQuery ? `${matches.length} matching ${matches.length === 1 ? 'section' : 'sections'}` : 'IN THIS GUIDE'}</p>
-          <nav aria-label="Guide sections">
-            <ol>{matches.map(section => <li key={section.id}><a href={`#${section.id}`}>{section.title}</a></li>)}</ol>
-          </nav>
-          {matches.length === 0 && <p className="developer-empty">No matching sections. Try “contracts”, “Maya”, or “deployment”.</p>}
-          <a className="developer-related" href="/system-design">Read the system design<ArrowRight size={14} aria-hidden="true" /></a>
-        </aside>
-
         <div className="developer-body">
           <div className="developer-status"><span>INTEGRATION CONTRACT · DRAFT</span><DocumentContent markdown={developerDocument.status} /></div>
           {developerDocument.sections.map((section, index) => <section key={section.id} id={section.id} className="developer-section" aria-labelledby={`${section.id}-title`}>
