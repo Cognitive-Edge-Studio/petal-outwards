@@ -11,6 +11,7 @@
 .developer-stack dl > div { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 18px; border-top: 1px solid #8c9e7855; padding-block: 15px; font-size: 13px; }
 .developer-stack dd { margin: 0; color: #d2dacb; font-family: monospace; }
 .developer-stack-note { display: block; font-size: 10px; color: #d2dacb; margin-top: 16px; line-height: 1.7; }
+.developer-cover { margin-top: 40px; }
 .developer-quick-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; padding-block: 24px; border-block: 1px solid var(--line); }
 .developer-quick-links a { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .developer-quick-links strong { font-size: 13px; font-weight: 500; }

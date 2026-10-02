@@ -4,6 +4,7 @@ import { DocumentFooter, DocumentHeader } from '@/components/DocumentNavigation'
 import { DocumentContent } from '@/components/DocumentContent'
 import { developerDocument } from '@/content/documents'
 import { useStoryMotion } from '@/hooks/use-story-motion'
+import developerCover from '../docs/assets/maya-developer-cover.png'
 import './scope.css'
 import './documents.css'
 import './developer-docs.css'
@@ -48,6 +49,9 @@ export default function DeveloperDocsPage() {
             <span className="developer-stack-note">HTTP / JSON · Server to server · Channel independent</span>
           </div>
         </div>
+        <figure className="scope-cover developer-cover">
+          <img src={developerCover} alt="Developers connect their application's identity and delivery modules to Maya's approved knowledge and private context through a scoped request-and-response API bridge." width={1536} height={1024} loading="eager" decoding="async" fetchPriority="high" />
+        </figure>
         <nav className="developer-quick-links" aria-label="Developer starting points">
           {quickLinks.map(link => <a key={link.id} href={`#${link.id}`}>
             <span><strong>{link.title}</strong><small>{link.description}</small></span><ArrowRight size={18} aria-hidden="true" />

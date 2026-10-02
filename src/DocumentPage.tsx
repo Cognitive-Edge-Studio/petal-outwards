@@ -5,8 +5,11 @@ import { DocumentContent } from '@/components/DocumentContent'
 import { documents } from '@/content/documents'
 import type { DocumentId } from '@/content/documents'
 import { useStoryMotion } from '@/hooks/use-story-motion'
-import mayaCover from '../docs/assets/maya-mvp-cover.png'
 import petalCover from '../docs/assets/petal-mvp-cover.png'
+import architectureCover from '../docs/assets/technical-architecture-cover.png'
+import roadmapCover from '../docs/assets/implementation-roadmap-cover.png'
+import systemDesignCover from '../docs/assets/system-design-cover.png'
+import improvementCover from '../docs/assets/self-improving-loop-cover.png'
 import './scope.css'
 import './documents.css'
 
@@ -38,13 +41,33 @@ const pageDetails = {
   },
 }
 
+const documentCovers: Record<DocumentId, { src: string; description: string }> = {
+  petal: {
+    src: petalCover,
+    description: 'A professional reviews an approved document in her private workspace, while three clients use their phones in separate conversation vignettes connected by golden botanical stems.',
+  },
+  architecture: {
+    src: architectureCover,
+    description: 'Isometric technical architecture illustration: separate Petal and Maya services connect through a controlled API bridge, with distinct databases and document storage, channel adapters, an external model, and engineers reviewing the system.',
+  },
+  roadmap: {
+    src: roadmapCover,
+    description: 'A winding implementation path passes through Maya construction and validation, Petal integration, readiness checks, a supervised pilot, and a reviewed limited launch.',
+  },
+  'system-design': {
+    src: systemDesignCover,
+    description: 'An engineered message-processing cutaway shows ordered scoped events, Maya knowledge and private memory, typed proposals, a human-controlled authorization gate, outbound dispatch, and delivery records.',
+  },
+  improvement: {
+    src: improvementCover,
+    description: 'A circular Maya improvement workshop connects scoped feedback, a bounded candidate, isolated comparison tests, professional review and publication, and observation with a previous-version restore path.',
+  },
+}
+
 export default function DocumentPage({ documentId }: { documentId: DocumentId }) {
   const document = documents[documentId]
   const details = pageDetails[documentId]
-  const cover = documentId === 'petal' ? petalCover : mayaCover
-  const coverDescription = documentId === 'petal'
-    ? 'A professional reviews an approved document in her private workspace, while three clients use their phones in separate conversation vignettes connected by golden botanical stems.'
-    : 'Botanical illustration of Maya growing into separate branches supporting professional relationships.'
+  const cover = documentCovers[documentId]
   useStoryMotion()
   useEffect(() => {
     window.document.title = 'Petal — ' + document.title
@@ -63,7 +86,7 @@ export default function DocumentPage({ documentId }: { documentId: DocumentId })
           <a className="scope-cta" href={'#' + document.sections[0].id}>Explore the document<ArrowDown size={16} aria-hidden="true" /></a>
         </div>
         <figure className="scope-cover">
-          <img src={cover} alt={coverDescription} width={1536} height={1024} loading="eager" decoding="async" fetchPriority="high" />
+          <img src={cover.src} alt={cover.description} width={1536} height={1024} loading="eager" decoding="async" fetchPriority="high" />
         </figure>
         <div className="scope-hero-bottom" aria-hidden="true"><span>Maya &amp; Petal · Project documents</span><span>{document.number} / {documentId.toUpperCase()}</span></div>
       </section>
