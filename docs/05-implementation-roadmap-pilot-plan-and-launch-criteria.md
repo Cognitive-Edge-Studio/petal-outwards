@@ -1,6 +1,6 @@
 # Implementation Roadmap, Pilot Plan, and Launch Criteria
 
-Status: Session 5 working draft, including the MVP self-improvement extension. The Maya-first build sequence, four parallel agentic workstreams, user review of all workstream outputs, and initial pilot size and duration remain confirmed. Effort estimates, pilot service mix, loop operating parameters and measured thresholds remain under discussion.
+Status: Working delivery draft. The Maya-first build sequence, four parallel agentic workstreams, release-owner review, and initial pilot size and duration are confirmed. Open effort, pilot, and operating choices are tracked in the [shared decision register](/system-design#11-decisions-to-close-before-implementation-or-pilot).
 
 ## Purpose and planning basis
 
@@ -14,7 +14,7 @@ The [bounded self-improving loop](07-self-improving-loop-design-and-mvp-scope.md
 
 The critical path is external WhatsApp feasibility, model-provider terms, the Maya gate, Petal integration, and the integrated capacity/recovery gate. Agentic parallelism helps with separate workstreams but cannot make a failed gate pass. A direct Meta integration that is not feasible by the early checkpoint triggers the previously accepted partner option rather than an unbounded wait; any route still needs tested number ownership, webhooks, sends, and delivery receipts. Meta's June 2026 [account-model](https://developers.meta.com/resources/videos/whatsapp-account-model-evolution/) and [Embedded Signup](https://developers.meta.com/resources/videos/unified-onboarding-whatsapp/) changes make the first-week connection spike important.
 
-Keep the agreed first-release scope fixed for this window: text conversations, approved existing documents, shareable profiles, professional control chat, inbox, and owner controls. Voice, live calls, custom document generation, searchable discovery, and specialized professional workflows do not enter the critical path. If a mandatory gate slips, move the pilot start rather than dropping the gate or relabeling an internal test as a real-user pilot.
+Keep the agreed [Maya](02-product-requirements-and-mvp-scope.md) and [Petal](03-petal-product-requirements-and-mvp-scope.md) release boundaries fixed; deferred capabilities do not enter the critical path. If a mandatory gate slips, move the pilot start rather than dropping the gate or relabeling an internal test as a real-user pilot.
 
 ## Proposed milestone sequence
 
@@ -57,25 +57,7 @@ This order does not prevent early parallel work on API contracts, evaluation des
 
 ## Self-improving loop work and gates
 
-![Human-approved improvement cycle: verified feedback, bounded candidate drafting, independent synthetic evaluation, exact professional approval and publication, later live use, evidence observation, and a professional decision to keep or restore. Failed or stale gates block publication, and retrieval changes need engineering and professional review.](assets/implementation-roadmap-improvement-loop.png)
-
-*Figure 2. Each pilot persona must complete a real-feedback cycle. The proposed observation policy requires at least seven days and 30 eligible turns, with an extension up to 21 days for sparse traffic; publication and restore remain professional-controlled.*
-
-<details>
-<summary>Editable Mermaid source</summary>
-
-```mermaid
-flowchart LR
-  F[Verified feedback] --> D[Draft one allowlisted candidate]
-  D --> E[Independent paired synthetic evaluation]
-  E --> P[Professional approves and publishes exact candidate]
-  P --> U[Later live use]
-  U --> O[Observe eligible evidence]
-  O --> K[Professional decides to keep or restore]
-  K --> F
-```
-
-</details>
+The [improvement-loop specification](07-self-improving-loop-design-and-mvp-scope.md) owns its workflow and proposed observation policy. This section assigns its work and evidence to the delivery milestones.
 
 Add the following work to the baseline milestones without reversing the Maya-first dependency:
 
@@ -83,7 +65,7 @@ Add the following work to the baseline milestones without reversing the Maya-fir
 - At the Maya functional gate, complete a synthetic loop for each validation persona, including verified signal, paired tests, exact owner publication, later use, observation decision and restore. Include retrieval dual review, stale/failed-gate rejection and private-context isolation.
 - During Petal implementation, connect canonical feedback/outcomes and the Learning workspace. Case directions remain case-specific; general improvement approval happens in the verified workspace.
 - At integrated readiness, prove correction/deletion, publication/dispatch races, budget/recovery behavior and the 100-conversation gate while loop work is active under its declared quotas. Set actual budgets, provider/purpose/retention controls and numerical thresholds before enabling real-data model work.
-- During the closed pilot, close at least one complete cycle for every pilot persona using real feedback and later live-turn evidence. The proposed observation policy requires at least seven days and 30 eligible turns, extending up to 21 days for sparse traffic; insufficient evidence remains visible and can extend the exit review.
+- During the closed pilot, close at least one complete cycle for every pilot persona using real feedback and later live-turn evidence. Apply the [declared observation policy](/self-improving-loop#11-measurement-after-publication-and-restore); insufficient evidence remains visible and can extend the exit review.
 
 Maya/evaluation owns the loop, Petal/WhatsApp owns feedback and outcome delivery, profile/workspace owns review usability, and platform quality/operations owns independent suites, quota isolation and recovery. Retrieval tuning needs both engineering and professional review. The user reviews platform release evidence; each professional controls publication of their own persona. [Document 07](07-self-improving-loop-design-and-mvp-scope.md) contains the proposed acceptance cases and source-review reconciliation.
 
@@ -104,7 +86,7 @@ The user is the initial human integration and release owner and will review ever
 
 ![Staged closed pilot: start with two professionals and willing clients, review early results, expand to at most five professionals after reviewing evidence, review pilot exit criteria, and make a limited-launch decision. Plan roughly four to six weeks; exact client counts remain open and the 100-conversation load test precedes the pilot.](assets/implementation-roadmap-pilot-rollout.png)
 
-*Figure 3. Pilot expansion and limited launch require reviewed evidence. Duration is a planning range; this rollout establishes no start or launch date.*
+*Figure 2. Pilot expansion and limited launch require reviewed evidence. Duration is a planning range; this rollout establishes no start or launch date.*
 
 <details>
 <summary>Editable Mermaid source</summary>
@@ -127,4 +109,4 @@ Bring professionals live in stages so the team can inspect early failures before
 
 A limited launch requires documented evidence that Maya's functional gate and the integrated capacity gate passed; cross-professional and cross-client isolation holds; permissions and commitment approvals work; Meta onboarding and channel rules are validated; the chosen model provider meets the agreed data-handling requirements; backup restore has been exercised; and professionals can inspect, correct, export, and request deletion of relationship data under a defined retention policy. The team must have case handling, outage notices, monitoring, and an incident response owner in place.
 
-Set measurable thresholds for latency, failures, handoff age, and recovery from prototype and pilot evidence before making a launch decision. Do not treat a successful demo as evidence for these gates. The user reviews the gate evidence and makes the initial pilot and limited-launch release decisions. Pilot service mix, exact client counts, delivery capacity, and effort ranges remain to be decided in this session. Progression to pilot and limited launch follows reviewed gate and pilot evidence.
+Set measurable thresholds for latency, failures, handoff age, and recovery from prototype and pilot evidence before making a launch decision. Do not treat a successful demo as evidence for these gates. The user reviews the gate evidence and makes the initial pilot and limited-launch release decisions. The [shared decision register](/system-design#11-decisions-to-close-before-implementation-or-pilot) tracks pilot service mix, client counts, effort forecasts, and operational thresholds. Progression follows reviewed gate and pilot evidence.

@@ -4,7 +4,7 @@ Maya is a channel-independent persona service. This guide covers what your appli
 
 ## What you can build
 
-Maya gives a professional one consistent persona with a separate, private relationship for each client. It combines published instructions, approved knowledge, and that client's relevant memory to propose a reply or action.
+Use Maya to add approved persona behavior and private relationship continuity to your application. The table below separates its capabilities from your integration responsibilities.
 
 | Use case | What Maya provides | What your application provides |
 |---|---|---|
@@ -13,7 +13,7 @@ Maya gives a professional one consistent persona with a separate, private relati
 | Sharing approved material | A proposal referencing an approved document and immutable version | Access checks, retrieval of that version, and delivery evidence |
 | Human handoff | An escalation reason and proposed acknowledgement | A case or inbox, notification, takeover, and explicit return of control |
 
-Petal is the first application integrating Maya. Another application can use the same boundary with its own chat interface or transport. Maya does not need to know a WhatsApp number, email address, or provider-specific recipient ID.
+The same integration boundary works with your chosen transport. Maya does not need a WhatsApp number, email address, or provider-specific recipient ID.
 
 ## Integration flow
 

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
+import { Menu } from '@base-ui/react/menu'
 import { ArrowUp, BookOpen, ChevronDown, ChevronLeft, ChevronRight, Flower2, Search } from 'lucide-react'
+import { caseStudies, type CaseStudyId } from '@/content/case-studies'
 
 export type DocumentEntry = { id: string; title: string; markdown?: string }
 
@@ -14,7 +16,30 @@ const documentLinks = [
   { id: 'developer', href: '/developer-docs', number: '08', label: 'Developer docs' },
 ] as const
 
-type ActiveDocument = typeof documentLinks[number]['id']
+type ActiveDocument = typeof documentLinks[number]['id'] | CaseStudyId
+
+function CaseStudies({ active }: { active: ActiveDocument }) {
+  const current = caseStudies.find(study => study.id === active)
+  return <nav className="case-studies-nav" aria-label="Case studies">
+    <Menu.Root>
+      <Menu.Trigger className="case-studies-trigger" data-active={!!current} aria-label={current ? `Case studies, ${current.label} selected` : 'Case studies'}>
+        Case studies<ChevronDown size={14} aria-hidden="true" />
+      </Menu.Trigger>
+      <Menu.Portal>
+        <Menu.Positioner className="case-studies-positioner" sideOffset={10} align="end">
+          <Menu.Popup className="case-studies-menu" data-case-study={current?.id}>
+            <Menu.Group>
+              <Menu.GroupLabel className="case-studies-label">Maya in practice</Menu.GroupLabel>
+              {caseStudies.map(study => <Menu.LinkItem key={study.id} href={study.href} closeOnClick className="case-studies-item" aria-current={active === study.id ? 'page' : undefined}>
+                <span><strong>{study.label}</strong><small>{study.description}</small></span><ChevronRight size={16} aria-hidden="true" />
+              </Menu.LinkItem>)}
+            </Menu.Group>
+          </Menu.Popup>
+        </Menu.Positioner>
+      </Menu.Portal>
+    </Menu.Root>
+  </nav>
+}
 
 function Documents({ active }: { active: ActiveDocument }) {
   const nav = useRef<HTMLElement>(null)
@@ -164,7 +189,7 @@ export function DocumentHeader({ active, entries }: { active: ActiveDocument; en
       <div className="reading-progress" aria-hidden="true" />
       <div className="page-width header-inner">
         <a href="/" className="wordmark" aria-label="Petal, the story"><Flower2 size={30} strokeWidth={1.4} aria-hidden="true" /><span>petal<span className="wordmark-dot">.</span></span></a>
-        <Documents active={active} />
+        <div className="document-header-navigation"><Documents active={active} /><CaseStudies active={active} /></div>
       </div>
     </header>
     <ReadingContents entries={entries} searchable={active === 'developer'} />

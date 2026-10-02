@@ -13,6 +13,14 @@
     { "source": "/self-improving-loop", "destination": "/index.html" },
     { "source": "/self-improving-loop/", "destination": "/index.html" },
     { "source": "/developer-docs", "destination": "/index.html" },
-    { "source": "/developer-docs/", "destination": "/index.html" }
+    { "source": "/developer-docs/", "destination": "/index.html" },
+    { "source": "/case-study/eudora", "destination": "/index.html" },
+    { "source": "/case-study/eudora/", "destination": "/index.html" },
+    { "source": "/case-study/buzybuzz", "destination": "/index.html" },
+    { "source": "/case-study/buzybuzz/", "destination": "/index.html" },
+    { "source": "/case-study/juriva", "destination": "/index.html" },
+    { "source": "/case-study/juriva/", "destination": "/index.html" },
+    { "source": "/case-study/wellora", "destination": "/index.html" },
+    { "source": "/case-study/wellora/", "destination": "/index.html" }
   ]
 }

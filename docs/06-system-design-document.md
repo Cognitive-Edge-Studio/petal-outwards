@@ -4,9 +4,9 @@ Status: **Revised technical review draft, 1 October 2026.** This document transl
 
 ## 1. Purpose and design rules
 
-The user's later 1 October MVP extension adds a [bounded self-improving loop](07-self-improving-loop-design-and-mvp-scope.md). That document owns its detailed proposal and the [source integration review](reviews/2026-10-01-self-improving-loop-review.md); this SDD integrates it into the existing service, publication, dispatch and data-lifecycle contracts. Loop parameters remain proposed and require measured gate evidence.
+The [bounded self-improving loop](07-self-improving-loop-design-and-mvp-scope.md) is part of the MVP. That document owns its detailed proposal; this SDD integrates it into the service, publication, dispatch, and data-lifecycle contracts. Loop parameters remain proposed and require measured gate evidence.
 
-Maya is a reusable, channel-independent persona service. Petal is its first application: it owns public profiles, the professional workspace, WhatsApp integration, cases, and delivery. The initial release supports text, existing approved documents, human handoff, and one professional per workspace. Maya's functional gate precedes Petal implementation; the integrated 100-conversation and recovery gates precede the closed pilot.
+This design implements the [Maya](02-product-requirements-and-mvp-scope.md) and [Petal](03-petal-product-requirements-and-mvp-scope.md) scope boundaries. [Technical Architecture](04-technical-architecture-and-engineering-guidelines.md) owns service and technology selections; the [roadmap](05-implementation-roadmap-pilot-plan-and-launch-criteria.md) owns build sequencing and release decisions.
 
 The design must preserve these invariants:
 
@@ -187,19 +187,17 @@ Before Petal implementation, a small channel-independent Maya test interface pro
 
 ### 6.8 Bounded self-improvement
 
-1. Petal transactionally records verified owner feedback and feed work against canonical message/decision/case references. Case, private-relationship and standing-information correction scopes are explicit; WhatsApp directions default to the identified case.
-2. Maya ingests eligible feedback/outcomes idempotently and aggregates within one professional. Distinct cases, reviewed labels and source revisions determine a gap; operational failures become engineering findings. Correct handoffs and unknown delivery do not become invented failure labels.
-3. Improvement model calls receive a minimal reviewed summary and approved general sources. Raw/pseudonymized client conversations stay outside those prompts and automated evaluation. Unsafe summaries require owner clarification instead of a generated generalization.
-4. A candidate changes instructions, one knowledge item, or allowlisted persona retrieval settings/tags. Fixed scope filters, commitments, dispatch and AI disclosure remain application controls. New service facts require authoritative owner input; retrieval tuning needs both professional and engineering review.
-5. Isolated evaluation compares exact baseline/candidate manifests with trusted synthetic suites and a stub dispatcher. The evaluator has no production data, WhatsApp, approval or publication credentials. A partial run, failed hard gate, stale evidence or inconclusive quality finding cannot authorize adoption.
-6. The professional approves the exact tested candidate/report digest and explicitly publishes through the existing lifecycle. Ranking settings are versioned in persona configuration; approved tags follow knowledge approval. An effective manifest references those existing records rather than adding another release pointer.
-7. Publication uses section 8's coordinated mutation barrier. Current validation plus that barrier prevents a pre-change validation result from authorizing a new stale dispatch claim after completion; there is no five-second token exception. Attempts claimed before the hold remain disclosed in flight under section 7.3.
-8. Later decisions/outcomes record their effective manifest for observation. Automatic safety holds may stop affected work, but restoring earlier still-valid content requires the owner and creates a new lifecycle record. Neither publication, case resolution nor restore resumes paused conversations.
-9. Source correction/withdrawal/deletion invalidates dependent signals, summaries, drafts, reports and adoption eligibility. Loop work uses durable state, fencing, recovery and budgets independently of live turns. Document 07 specifies proposed settings and SIL-01–SIL-19 acceptance cases.
+The [Self-Improving Loop](07-self-improving-loop-design-and-mvp-scope.md) owns discovery, candidate evaluation, professional review, and observation. Its integration with the runtime uses these contracts:
+
+1. Petal records verified feedback and feed work transactionally against canonical references. Case, private-relationship, and standing-information correction scopes remain explicit.
+2. Maya uses the ordered feed and source revisions to invalidate dependent loop artifacts. Loop jobs use durable work, fencing, recovery, and budgets independently of live turns; protected private evidence stays outside general candidate payloads and automated evaluation.
+3. Adoption invokes the existing persona/knowledge lifecycle with the exact tested candidate/report manifest and required professional and retrieval-engineering grants. It creates no competing active release pointer.
+4. Publication uses section 8’s coordinated mutation barrier. No pre-change validation result may authorize a new stale dispatch claim after completion. Attempts claimed before the hold remain disclosed in flight under section 7.3.
+5. Later decisions and outcomes record the effective manifest actually used. Holds may stop affected work; owner restore uses current lifecycle/readiness checks. Publication, case resolution, and restore cannot resume a paused conversation.
 
 ![Bounded improvement loop: verified feedback, one allowed candidate, isolated evaluation, exact owner approval, publication with coordinated holds, and observation of later use.](assets/system-design-improvement-loop.png)
 
-*Evaluation and current evidence must pass before owner approval and publication. Retrieval tuning also needs engineering approval; publication and restore never resume a paused conversation. [Illustration prompts](assets/system-design-diagram-prompts.md).*
+*The diagram locates publication and observation within the service contracts. The dedicated loop specification defines evaluation gates and reviewer actions.*
 
 ## 7. State, ordering, and idempotency
 
@@ -297,7 +295,7 @@ Loop artifacts are also lifecycle targets: exports/deletion include scoped feedb
 
 The 16 numbered connectors show runtime dependencies and background-work routes. The scheduling inset references handlers in the same Petal and Maya API deployments. Cloud SQL starts with one instance containing separate databases; Cloud Storage uses separate buckets. Cloud Scheduler remains proposed. Supporting control cards summarize operations without specifying a network topology or promising that every provider processes data in Singapore. [Illustration prompts and connection specification](assets/deployment-operations-diagram-prompt.md).
 
-The starting stack is Python/FastAPI for Maya, TypeScript/NestJS for Petal, and TypeScript/Next.js/React for web. GCP Cloud Run hosts the applications; Cloud SQL for PostgreSQL holds separate Maya and Petal databases; separate Cloud Storage buckets hold authoritative source documents and sent copies. Cloud Tasks handles retries and reminders. Secret Manager holds credentials. Cloud Build and Terraform support repeatable deployments. Search begins with scoped PostgreSQL metadata and text search; pgvector is conditional on Maya evaluation evidence.
+The [Architecture technology register](/technical-architecture#tools-technologies-and-model-providers) defines the starting stack, services, and conditional retrieval choices. This deployment applies those selections to the runtime and recovery routes above; Cloud Scheduler remains a proposed addition under section 7.2.
 
 Use structured correlation across webhook receipt, work publication, Maya decision, approval, send attempt and receipt. Monitor oldest unscheduled work, queue age, expired processing leases, cursor gaps, unknown send attempts, blocked alerts, stale-result rejections, lifecycle-operation age, latency, handoff age, provider/model errors, scope denials and cost per conversation. Alerts need a named incident owner and numerical thresholds before the pilot.
 
@@ -341,6 +339,8 @@ Executable API examples, fixtures and measured test results will attach to these
 
 ## 11. Decisions to close before implementation or pilot
 
+This is the shared decision register for the architecture, roadmap, and improvement-loop documents. Their detailed proposals remain in the linked sections; close the applicable decisions here before the stated checkpoint.
+
 | Decision | Needed by | Current state |
 |---|---|---|
 | Final OpenAPI operations, schemas, scoped idempotency retention and HTTP/error mappings | Maya API client implementation | Behaviors defined above; freeze schema/examples with contract tests. |
@@ -352,9 +352,11 @@ Executable API examples, fixtures and measured test results will attach to these
 | Model provider and context/retention terms | Real-client traffic | External API agreed; provider unselected. |
 | Numerical latency, error, cost, alert, backup and recovery targets | Integrated readiness gate | Set from prototype measurements and publish before the gate. |
 | Retention periods, deletion exceptions and relationship reactivation policy | Real-client pilot | Revision/hold/restore protocol defined; policy and verified external-provider controls remain open. |
-| Exact deployment settings, Identity Platform fit, and regional data flows | Production environment | Starting services chosen; sizing and service-by-service verification pending. |
-| Improvement API/allowlist, reviewer grants and fixture access | Loop implementation | Proposed in Document 07; map to existing lifecycle/manifest and freeze contract examples. |
-| Improvement budgets, purpose/retention, quality thresholds and observation policy | Automatic runs and closed pilot | Source defaults remain proposed; benchmark complete suites and reforecast delivery before real-data use. |
+| Exact deployment settings, Identity Platform fit, and regional data flows | Production environment | Starting services chosen; sizing, authentication cost/data location, customer regional requirements, and service-by-service verification pending. |
+| Team fit and semantic retrieval | Architecture implementation | Review staffing for the Python/TypeScript split; evaluate whether scoped PostgreSQL text search needs pgvector. |
+| Pilot participants, service mix, client counts, and effort forecast | Pilot invitations | Two professionals initially, at most five, roughly four to six weeks; exact client counts, service mix, delivery capacity, and dependency/loop effort forecast remain open. |
+| Improvement API/allowlist, reviewer grants and fixture access | Loop implementation | [Loop records and operations](/self-improving-loop#8-logical-records-and-api-contract) remain proposed; freeze source-event mapping, allowlist, dependency invalidation, sensitive review/restore controls, and fixture access policy. |
+| Improvement budgets, purpose/retention, quality thresholds and observation policy | Automatic runs and closed pilot | [Evaluation policy](/self-improving-loop#7-evaluation-and-acceptance-policy) and [operating defaults](/self-improving-loop#10-scheduling-limits-and-failure-behavior) remain proposed; calibrate graders/held-out splits, uncertainty and non-inferiority margins; benchmark complete suites and approve token/monetary ceilings, enablement, evidence access/retention, and observation thresholds before real-data use. |
 
 ### 11.1 Revision record
 

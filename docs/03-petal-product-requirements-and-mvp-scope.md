@@ -1,12 +1,12 @@
 # Petal Product Requirements and MVP Scope
 
-Status: Confirmed Session 3 product scope, extended on 1 October 2026 to include feedback and professional review for the bounded MVP improvement loop. Its detailed design remains proposed. WhatsApp account setup, routing mechanics, notification timing, and measured service targets remain for the technical and delivery documents.
+Status: Confirmed product scope, including feedback and professional review for the bounded MVP improvement loop. Technical feasibility and operating parameters remain subject to the [shared decision register](/system-design#11-decisions-to-close-before-implementation-or-pilot).
 
 ## Product boundary
 
-Petal is the first planned application of Maya. It gives an individual professional a public profile, a private workspace for their professional information and Maya Persona, and a way to continue client relationships through WhatsApp. Maya's reusable MVP is specified separately in [Maya MVP Scope](02-product-requirements-and-mvp-scope.md). Maya must pass its functional validation before Petal is implemented, and the roughly 100-conversation capacity ambition must be tested before a Petal pilot.
+Petal is the first planned application of Maya. It gives an individual professional a public profile, a private workspace for their professional information and Maya Persona, and a way to continue client relationships through WhatsApp. Maya's reusable MVP is specified separately in [Maya MVP Scope](02-product-requirements-and-mvp-scope.md). Implementation and pilot dependencies are defined in the [roadmap](05-implementation-roadmap-pilot-plan-and-launch-criteria.md).
 
-The first Petal release supports one professional per workspace across varied professions. Team accounts, specialized profession workflows, and a searchable professional directory are later possibilities.
+The scope table below defines the first release across varied professions.
 
 ## Confirmed first-release journey
 
@@ -19,13 +19,11 @@ The first Petal release supports one professional per workspace across varied pr
 
 *Figure 1. A client reaches the professional through the shared profile and business number. Requests needing review become cases in the Petal inbox and generate alerts through the separate Petal-managed control number. Replies to alerts provide directions for the identified case.*
 
-The professional controls their profile, approved knowledge, documents, and Maya settings in the private workspace. Maya owns private client relationship memory, scoped to each professional and client; Petal owns the WhatsApp conversation and case records. The two kinds of context remain distinct from the professional's general approved information.
+The workspace exposes owner controls for the journey above. [Technical Architecture](04-technical-architecture-and-engineering-guidelines.md) defines service ownership; the relationship-continuity section below explains which client context Maya uses.
 
 A clear instruction from the professional can authorize Maya to send a routine reply or an existing approved item for the identified client case, within the persona's current permissions. Prices, appointments, and other commitments require explicit approval. A case instruction does not silently change the professional's published knowledge or persona settings.
 
-The professional-facing WhatsApp chat initially supports case directions and status questions. A professional may also describe a desired change to their profile, approved knowledge, or Maya settings there; Maya can prepare it as a draft. The professional tests and publishes any standing change in the Petal workspace before it affects client conversations.
-
-The private workspace also supports the [bounded improvement loop](07-self-improving-loop-design-and-mvp-scope.md). The professional can classify feedback as a case correction, private relationship correction, or standing-information change, and review Maya's suggested improvements with their exact diff, sources and test results. Approval and publication happen in the workspace; a case-linked WhatsApp direction does not publish a general change. Later outcomes inform retention or an owner-controlled restore. Allowlisted retrieval tuning also requires engineering review.
+The professional-facing WhatsApp chat also supports status questions and requests to draft a standing change. Standing changes are tested and published in the workspace. There, feedback is classified as a case correction, private relationship correction, or standing-information change; the professional reviews suggested changes with their exact diff, sources, and test results. The [improvement-loop review view](/self-improving-loop#9-professional-review-and-worked-examples) defines these controls, including engineering review for retrieval tuning and owner-controlled restore.
 
 ## First-release boundaries already decided
 
@@ -40,7 +38,7 @@ The private workspace also supports the [bounded improvement loop](07-self-impro
 
 ## Relationship continuity
 
-The [One Self, Many Faces](https://claude.ai/artifact/3kvkcjiCU6W2ubLdKMqj5L) artifact proposes one stable identity with a private history and a different relational "face" for each person. Applied to Petal, the professional's Maya Persona keeps a separate relationship state for each client: relevant facts and preferences, prior episodes, and pending follow-ups. For each message, Maya assembles the professional's approved identity and knowledge with only that client's relevant relationship context. One client's information must not appear in another client's conversation.
+Maya keeps relevant facts, preferences, prior episodes, and pending follow-ups separately for each client. For each message, Maya assembles the professional's approved identity and knowledge with only that client's relevant relationship context. One client's information must not appear in another client's conversation.
 
 This continuity grows through ongoing Petal interactions. For an existing client, the professional can add a private, source-linked relationship brief before the first Petal-connected message. Maya can clarify uncertain details with the client and update that client's private memory. Automatic import of older WhatsApp chats is not required for the MVP; it could be examined later as one possible source of earlier context.
 
@@ -52,7 +50,7 @@ This continuity grows through ongoing Petal interactions. For an existing client
 
 The public profile includes the professional's name, a short service description, whether they work locally or remotely, and an action to contact them on WhatsApp. A photo, credentials, and more detailed offerings are optional in the first release. The professional's private workspace holds information that is not approved for public display.
 
-Guided setup must leave an approved profile, approved service information, published Maya settings, a tested client-facing WhatsApp connection, and a successful handoff test. The professional's own business number serves clients. One separate Petal-managed WhatsApp number serves professional alerts and directions; its registration, routing, and presentation will be designed later.
+Guided setup must leave an approved profile, approved service information, published Maya settings, a tested client-facing WhatsApp connection, and a successful handoff test. Channel onboarding and routing must satisfy the [System Design decision register](/system-design#11-decisions-to-close-before-implementation-or-pilot) before launch.
 
 ## Handoff states and alerts
 

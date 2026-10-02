@@ -1,0 +1,106 @@
+/* Distinct concept identities; all rules are scoped to these case studies. */
+.professional-site { font-family: 'Inter Variable', sans-serif; }
+.juriva-site, .case-studies-menu[data-case-study='juriva'] { --paper: #f8f6f0; --ink: #18293d; --copy: #556071; --coral: #876537; --line: #d9d5cb; --brand: #18293d; --tint: #ede9df; --card: #fffdf8; }
+.wellora-site, .case-studies-menu[data-case-study='wellora'] { --paper: #fcfdf9; --ink: #183f3a; --copy: #536862; --coral: #267166; --line: #d7e4dc; --brand: #267166; --tint: #edf4e9; --card: #fff; }
+.professional-site .site-header { background: color-mix(in srgb, var(--paper) 96%, transparent); border-color: var(--line); }
+.professional-site ::selection { background: var(--tint); }
+.professional-site .reading-contents { background: var(--card); border-color: var(--line); }
+.professional-site .reading-sections a[aria-current='location'], .professional-site .reading-sections a:hover, .professional-site .document-nav a:hover { background: var(--tint); }
+.professional-site .reading-progress { background: var(--coral); }
+.wellora-site .reading-contents-toggle { font-family: inherit; }
+.professional-site .professional-hero { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 72px; padding-block: 55px 40px; }
+.professional-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font-size: 31px; font-weight: 550; letter-spacing: -1px; color: var(--ink); }
+.juriva-site .professional-brand { font-family: Georgia, serif; font-size: 36px; }
+.professional-brand > svg, .professional-brand-dot { color: var(--coral); }
+.professional-eyebrow { display: block; font-size: 9px; line-height: 1.7; letter-spacing: 1.6px; color: var(--copy); font-weight: 550; }
+.professional-site .professional-hero h1 { font-size: clamp(43px, 4.2vw, 64px); font-weight: 400; line-height: 1.1; letter-spacing: -2.5px; margin: 24px 0; max-width: none; }
+.professional-hero h1 em { color: var(--coral); font-style: italic; }
+.wellora-site .professional-hero h1 { font-family: inherit; font-size: clamp(40px, 3.6vw, 55px); font-weight: 500; line-height: 1.17; letter-spacing: -2px; }
+.wellora-site .professional-hero h1 em { font-style: normal; font-weight: 400; }
+.professional-hero .document-content p { font-size: 15px; line-height: 1.85; max-width: 560px; }
+.professional-cta { display: inline-flex; align-items: center; gap: 30px; background: var(--brand); color: #fff; padding: 17px 24px; margin-top: 16px; font-size: 12px; font-weight: 550; border-radius: 3px; }
+.professional-cta:hover { filter: brightness(1.15); }
+.wellora-site .professional-cta { border-radius: 999px; }
+.professional-powered { display: flex; align-items: center; gap: 7px; font-size: 10px; line-height: 1.6; color: var(--copy); margin-top: 18px; }
+.professional-powered > svg { color: var(--coral); flex-shrink: 0; }
+.professional-hero-visual { position: relative; margin: 0; padding-left: 12px; }
+.professional-photo-frame { overflow: hidden; max-width: 380px; margin-inline: auto; border: 1px solid var(--line); border-radius: 160px 160px 4px 4px; }
+.professional-photo-frame img { width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; display: block; }
+.wellora-site .professional-photo-frame { border-radius: 110px 24px 110px 24px; }
+.professional-presence-card { position: relative; display: flex; align-items: center; gap: 16px; padding: 20px; background: var(--card); border: 1px solid var(--line); box-shadow: 0 12px 38px #18293d0c; margin: -84px -12px 0 -25px; }
+.professional-presence-icon { display: grid; place-items: center; flex-shrink: 0; width: 42px; height: 42px; color: var(--coral); background: var(--tint); border-radius: 50%; }
+.professional-presence-card small { display: block; font-size: 8px; letter-spacing: 1.3px; color: var(--coral); }
+.professional-presence-card strong { display: block; font-size: 13px; font-weight: 550; line-height: 1.5; margin-block: 8px; }
+.professional-presence-card span:not(.professional-presence-icon) { display: block; font-size: 9px; color: var(--copy); }
+.wellora-site .professional-presence-card { border-radius: 22px; }
+.professional-hero-visual > figcaption { text-align: center; font-size: 10px; line-height: 1.7; color: var(--copy); margin-top: 20px; }
+.professional-pathways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; padding-block: 30px 56px; }
+.professional-pathways a { display: flex; align-items: flex-start; gap: 14px; border-top: 1px solid var(--line); padding-top: 21px; }
+.professional-pathway-number { color: var(--coral); font-size: 11px; padding-top: 2px; }
+.professional-pathways strong { display: block; font-size: 12px; font-weight: 550; line-height: 1.5; }
+.professional-pathways div > span { display: block; font-size: 10px; color: var(--copy); line-height: 1.8; margin-top: 7px; }
+.professional-pathways svg { margin-left: auto; color: var(--coral); flex-shrink: 0; }
+.professional-pathways a:hover strong { color: var(--coral); }
+.professional-section { padding-block: 85px; border-top: 1px solid var(--line); }
+.professional-section-2, .professional-section-4 { background: var(--tint); }
+.professional-section-inner { display: grid; grid-template-columns: .8fr 1.3fr; gap: 65px; }
+.professional-section .chapter-heading { margin: 0; }
+.professional-chapter-number { display: block; font-size: 9px; letter-spacing: 1.5px; color: var(--coral); margin-bottom: 24px; }
+.professional-site .chapter-heading h2 { font-size: clamp(30px, 3vw, 42px); font-weight: 400; line-height: 1.16; letter-spacing: -1px; }
+.wellora-site .chapter-heading h2 { font-family: inherit; font-weight: 450; font-size: clamp(28px, 2.7vw, 38px); letter-spacing: -1.4px; }
+.professional-section-copy { min-width: 0; }
+.professional-section .document-content p { font-size: 15px; line-height: 1.85; }
+.professional-personas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+.professional-role { padding: 22px 18px; background: var(--card); border: 1px solid var(--line); }
+.professional-role > svg { color: var(--coral); margin-bottom: 22px; }
+.professional-role small { display: block; font-size: 8px; letter-spacing: 1.3px; color: var(--copy); line-height: 1.7; }
+.professional-role h3 { font-family: Georgia, serif; font-size: 20px; line-height: 1.3; font-weight: 400; margin: 12px 0; }
+.professional-role p { color: var(--copy); font-size: 12px; line-height: 1.8; margin: 0; }
+.wellora-site .professional-role { border-radius: 20px; }
+.wellora-site .professional-role h3 { font-family: inherit; font-size: 17px; font-weight: 500; }
+.professional-example { border: 1px solid var(--line); padding: 26px; margin: 30px 0 0; background: var(--card); }
+.wellora-site .professional-example { border-radius: 25px; }
+.professional-example figcaption { color: var(--copy); font-size: 8px; letter-spacing: 1.3px; line-height: 1.7; margin-bottom: 22px; }
+.professional-chat-heading { display: flex; align-items: center; gap: 13px; margin-bottom: 24px; }
+.professional-chat-heading > svg { color: var(--coral); flex-shrink: 0; }
+.professional-chat-heading strong, .professional-resource strong { display: block; font-size: 12px; font-weight: 550; line-height: 1.5; }
+.professional-chat-heading small, .professional-resource small { display: block; color: var(--copy); font-size: 9px; line-height: 1.7; margin-top: 6px; }
+.professional-message { font-size: 12px; line-height: 1.85; padding: 16px; max-width: 92%; margin: 0 0 12px; }
+.professional-message-person { background: #f0f1f3; margin-left: auto; }
+.professional-message-persona { background: var(--tint); }
+.wellora-site .professional-message { border-radius: 16px; }
+.wellora-site .professional-message-person { border-bottom-right-radius: 4px; }
+.wellora-site .professional-message-persona { border-bottom-left-radius: 4px; }
+.professional-resource { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--line); padding-top: 18px; margin-top: 22px; }
+.professional-resource > svg { color: var(--coral); flex-shrink: 0; }
+.professional-continuity { display: flex; align-items: flex-start; gap: 16px; padding-top: 26px; border-top: 1px solid var(--line); margin-top: 30px; }
+.professional-continuity > span { color: var(--coral); }
+.professional-continuity strong { font-weight: 550; font-size: 14px; }
+.professional-continuity p { font-size: 12px; line-height: 1.8; color: var(--copy); margin: 10px 0 0; }
+.professional-handoff-title { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.professional-handoff-title h3 { font-size: 16px; font-weight: 500; margin: 0; }
+.professional-handoff-title > span { color: var(--coral); background: var(--tint); font-size: 9px; padding: 7px 10px; }
+.wellora-site .professional-handoff-title > span { border-radius: 999px; }
+.professional-handoff dl { margin-top: 22px; }
+.professional-handoff dl > div { display: grid; grid-template-columns: 105px 1fr; gap: 20px; border-bottom: 1px solid var(--line); padding-block: 14px; font-size: 12px; line-height: 1.7; }
+.professional-handoff dt { color: var(--copy); }
+.professional-handoff dd { margin: 0; }
+.professional-handoff > p { font-size: 10px; color: var(--copy); line-height: 1.8; margin: 20px 0 0; }
+.professional-closing { border-top: 1px solid var(--line); margin-top: 35px; padding-top: 30px; }
+.professional-closing > svg { color: var(--coral); }
+.professional-closing p { font-family: Georgia, serif; font-size: 28px; line-height: 1.4; margin: 18px 0; }
+.wellora-site .professional-closing p { font-family: inherit; font-size: 25px; font-weight: 450; letter-spacing: -.7px; }
+.professional-closing > span { font-size: 9px; letter-spacing: 1.2px; color: var(--copy); }
+.professional-return { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 38px; }
+.professional-return a { display: flex; align-items: center; gap: 12px; font-size: 12px; }
+.professional-return a:hover { color: var(--coral); }
+.juriva-site .site-footer { background: #18293d; }
+.wellora-site .site-footer { background: #183f3a; }
+.professional-site .site-footer .wordmark, .professional-site .site-footer .back-top { color: #fff; }
+.juriva-site .site-footer .wordmark svg, .juriva-site .site-footer .wordmark-dot { color: #c6aa7b; }
+.wellora-site .site-footer .wordmark svg, .wellora-site .site-footer .wordmark-dot { color: #b9d8bf; }
+@media (min-width: 1101px) { .professional-section-inner { padding-right: 260px; grid-template-columns: .75fr 1.3fr; gap: 42px; } }
+@media (max-width: 1100px) { .professional-site .professional-hero { gap: 40px; } .professional-section-inner { gap: 38px; } }
+@media (max-width: 800px) { .professional-site .professional-hero { grid-template-columns: 1fr; padding-top: 36px; } .professional-hero-visual { width: min(100%, 420px); justify-self: center; padding-inline: 18px; margin-top: 12px; } .professional-presence-card { margin-inline: -12px; } .professional-pathways { grid-template-columns: 1fr; gap: 20px; } .professional-section-inner { grid-template-columns: 1fr; gap: 28px; } .professional-section { padding-block: 58px; } }
+@media (max-width: 540px) { .professional-site .professional-hero h1 { font-size: 43px; letter-spacing: -1.8px; } .wellora-site .professional-hero h1 { font-size: 39px; letter-spacing: -1.8px; } .professional-brand { margin-bottom: 20px; } .professional-presence-card { padding: 17px; gap: 12px; } .professional-personas { grid-template-columns: 1fr; } .professional-example { padding: 22px 16px; } .professional-handoff dl > div { grid-template-columns: 82px 1fr; gap: 12px; } .professional-return { align-items: flex-start; flex-direction: column; } }
+@media print { .professional-site .professional-hero, .professional-section-inner { display: block; } .professional-hero-visual { max-width: 240px; margin-top: 24px; } .professional-presence-card { margin: 15px 0 0; box-shadow: none; } .professional-pathways { display: none; } }

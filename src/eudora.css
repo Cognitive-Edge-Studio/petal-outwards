@@ -1,0 +1,107 @@
+/* Eudora's public landing page uses Fredoka and the Eudora Professional light palette.
+   Keep the identity scoped here so other Petal documents retain their styling. */
+@font-face {
+  font-family: 'Fredoka Variable';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/eudora/fonts/fredoka-latin-wght-normal.woff2') format('woff2');
+}
+.eudora-site, .case-studies-menu[data-case-study='eudora'] {
+  --paper: oklch(0.985 0.003 250);
+  --ink: oklch(0.22 0.02 255);
+  --copy: oklch(0.46 0.02 255);
+  --coral: oklch(0.45 0.1 255);
+  --line: oklch(0.9 0.01 250);
+  --eudora-muted: oklch(0.96 0.008 250);
+  font-family: 'Fredoka Variable', sans-serif;
+}
+.eudora-site ::selection { background: #ddd9fa; color: var(--ink); }
+.eudora-site .site-header { background: color-mix(in srgb, var(--paper) 94%, transparent); border-color: var(--line); }
+.eudora-site .document-nav a:hover, .eudora-site .document-nav a[aria-current='page'] { background: var(--eudora-muted); }
+.eudora-site .wordmark { font-family: 'Inter Variable', sans-serif; }
+.eudora-site .reading-contents { background: color-mix(in srgb, var(--paper) 97%, transparent); }
+.eudora-site .reading-contents-toggle { font-family: inherit; font-weight: 500; }
+.eudora-site .reading-sections a:hover, .eudora-site .reading-sections a[aria-current='location'] { background: var(--eudora-muted); }
+.eudora-site .reading-sections a > span { color: var(--copy); }
+.eudora-site .eudora-hero { grid-template-columns: 1.1fr .9fr; gap: 64px; padding-top: 60px; }
+.eudora-site .eudora-hero h1 { font-family: inherit; font-weight: 600; font-size: clamp(70px, 7vw, 104px); letter-spacing: -3px; max-width: 620px; margin: 24px 0; }
+.eudora-hero h1 > span { display: block; margin-top: 18px; font-size: clamp(32px, 3.2vw, 46px); font-weight: 500; line-height: 1.15; letter-spacing: -1px; }
+.eudora-site .hero-eyebrow { width: fit-content; border: 1px solid var(--line); background: white; border-radius: 999px; padding: 9px 13px; font-size: 10px; letter-spacing: 1.3px; }
+.eudora-hero .document-content strong { color: var(--ink); font-weight: 500; }
+.eudora-site .eudora-hero .scope-content p { max-width: 540px; font-size: 17px; line-height: 1.75; }
+.eudora-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 28px; }
+.eudora-hero-actions .scope-cta { margin-top: 0; background: var(--coral); font-size: 14px; }
+.eudora-hero-actions .scope-cta:hover { background: oklch(0.38 0.1 255); }
+.eudora-motion-toggle { display: inline-flex; align-items: center; gap: 7px; padding: 10px 0; font-size: 13px; color: var(--copy); cursor: pointer; }
+.eudora-motion-toggle:hover { color: var(--coral); }
+.eudora-principle { align-self: center; text-align: center; border: 1px solid #e3e4f1; border-radius: 32px; padding: 24px 28px 28px; background: linear-gradient(145deg, #f2f0fc, #f3f9fb 60%, #fff8ed); }
+.eudora-visual-eyebrow { display: inline-block; padding: 8px 12px; border-radius: 999px; background: #ffffffbd; color: var(--coral); font-size: 10px; letter-spacing: 1.5px; }
+.eudora-teachers-photo { display: block; width: 100%; max-width: 380px; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 22px; margin: 18px auto 22px; }
+.eudora-principle-title { font: 500 clamp(25px, 2.5vw, 34px)/1.15 'Fredoka Variable', sans-serif; letter-spacing: -.5px; margin: 8px 0 12px; }
+.eudora-principle-copy { font-size: 14px; line-height: 1.65; color: var(--copy); margin: 0; }
+.eudora-lottie { position: relative; width: 100%; aspect-ratio: 1; max-width: 360px; margin-inline: auto; }
+.eudora-lottie canvas { display: block; width: 100%; height: 100%; }
+.eudora-lottie-fallback { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); color: #9daed1; }
+.eudora-site .eudora-section { border-top: 1px solid var(--line); }
+.eudora-section:nth-of-type(2n) { background: var(--eudora-muted); }
+.eudora-site .eudora-section .scope-section-inner { display: block; }
+.eudora-section .chapter-heading { max-width: 800px; margin-bottom: 34px; }
+.eudora-site .chapter-heading h2 { font-family: inherit; font-weight: 500; line-height: 1.15; font-size: clamp(32px, 3.2vw, 46px); letter-spacing: -1px; }
+.eudora-site .chapter-number { color: var(--coral); }
+.eudora-section-story { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(220px, .8fr); gap: 36px; align-items: center; }
+.eudora-section-story > * { min-width: 0; }
+.eudora-section .document-content { max-width: 800px; }
+.eudora-section .document-content p, .eudora-section .document-content li { font-size: 17px; line-height: 1.8; }
+.eudora-section-visual { margin: 0; padding: 16px 12px 24px; border: 1px solid var(--line); border-radius: 26px; background: #ffffffaa; text-align: center; }
+.eudora-section-visual figcaption { padding-inline: 10px; color: var(--copy); font-size: 14px; line-height: 1.5; }
+.eudora-roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 38px; }
+.eudora-role { padding: 26px 22px; border: 1px solid var(--line); border-radius: 18px; background: white; box-shadow: 0 2px 5px #152b4e04; }
+.eudora-role > svg { color: var(--coral); }
+.eudora-role h3 { font: 500 25px/1.2 'Fredoka Variable', sans-serif; margin: 18px 0 12px; }
+.eudora-role p { color: var(--copy); font-size: 15px; line-height: 1.7; margin: 0; }
+.eudora-section-label { display: flex; align-items: center; gap: 10px; font-size: 10px; letter-spacing: 1.5px; color: var(--coral); margin-bottom: 24px; }
+.eudora-site .eudora-review { background: #f0f3fa; }
+.eudora-review .document-content ol { list-style: none; counter-reset: review; padding: 0; display: grid; gap: 12px; margin: 28px 0; }
+.eudora-review .document-content ol li { counter-increment: review; padding: 18px 18px 18px 48px; border: 1px solid var(--line); border-radius: 14px; background: #ffffffc2; }
+.eudora-review .document-content ol li::before { content: counter(review, decimal-leading-zero); top: 21px; left: 16px; width: auto; height: auto; border-radius: 0; background: none; color: var(--coral); font-size: 13px; }
+.eudora-site .eudora-closing { background: #edf1fa; }
+.eudora-closing .document-content p { color: var(--copy); }
+.eudora-site .document-return { font-family: inherit; font-weight: 500; }
+.eudora-site .document-return small { font-family: inherit; }
+.eudora-concept-note { color: var(--copy); font-size: 13px; }
+.eudora-site .site-footer { background: var(--ink); }
+.eudora-site .site-footer .wordmark, .eudora-site .site-footer .back-top { color: var(--paper); }
+.eudora-site .site-footer .wordmark svg, .eudora-site .site-footer .wordmark-dot { color: #c6cfee; }
+@media (max-width: 1100px) {
+  .eudora-site .eudora-hero { gap: 32px; }
+  .eudora-section-story { gap: 28px; }
+}
+@media (max-width: 800px) {
+  .eudora-site .eudora-hero { grid-template-columns: 1fr; padding-top: 36px; }
+  .eudora-site .eudora-hero h1 { font-size: 78px; }
+  .eudora-principle { max-width: 500px; width: 100%; justify-self: center; }
+  .eudora-roles { grid-template-columns: 1fr; gap: 12px; }
+  .eudora-role { padding: 24px; }
+  .eudora-role h3 { margin-top: 14px; }
+  .eudora-section-story { grid-template-columns: 1fr; }
+  .eudora-section-visual { width: min(100%, 380px); justify-self: center; }
+}
+@media (max-width: 540px) {
+  .eudora-site .eudora-hero h1 { font-size: 66px; letter-spacing: -2px; }
+  .eudora-hero h1 > span { font-size: 34px; letter-spacing: -.5px; }
+  .eudora-site .eudora-hero .hero-eyebrow { font-size: 9px; letter-spacing: .8px; }
+  .eudora-principle { padding: 22px 18px; }
+  .eudora-site .eudora-hero .scope-content p, .eudora-section .document-content p, .eudora-section .document-content li { font-size: 16px; }
+  .eudora-site .scope-return { align-items: start; flex-direction: column; gap: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-studies-trigger > svg { transition: none; }
+  .eudora-motion-toggle { display: none; }
+}
+@media print {
+  .eudora-site .eudora-hero, .eudora-roles, .eudora-section-story { display: block; }
+  .eudora-lottie, .eudora-motion-toggle, .eudora-section-visual { display: none; }
+  .eudora-principle { margin-top: 20px; }
+  .eudora-role { margin-bottom: 12px; }
+}

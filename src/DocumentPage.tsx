@@ -5,7 +5,8 @@ import { DocumentContent } from '@/components/DocumentContent'
 import { documents } from '@/content/documents'
 import type { DocumentId } from '@/content/documents'
 import { useStoryMotion } from '@/hooks/use-story-motion'
-import cover from '../docs/assets/maya-mvp-cover.png'
+import mayaCover from '../docs/assets/maya-mvp-cover.png'
+import petalCover from '../docs/assets/petal-mvp-cover.png'
 import './scope.css'
 import './documents.css'
 
@@ -40,6 +41,10 @@ const pageDetails = {
 export default function DocumentPage({ documentId }: { documentId: DocumentId }) {
   const document = documents[documentId]
   const details = pageDetails[documentId]
+  const cover = documentId === 'petal' ? petalCover : mayaCover
+  const coverDescription = documentId === 'petal'
+    ? 'A professional reviews an approved document in her private workspace, while three clients use their phones in separate conversation vignettes connected by golden botanical stems.'
+    : 'Botanical illustration of Maya growing into separate branches supporting professional relationships.'
   useStoryMotion()
   useEffect(() => {
     window.document.title = 'Petal — ' + document.title
@@ -58,7 +63,7 @@ export default function DocumentPage({ documentId }: { documentId: DocumentId })
           <a className="scope-cta" href={'#' + document.sections[0].id}>Explore the document<ArrowDown size={16} aria-hidden="true" /></a>
         </div>
         <figure className="scope-cover">
-          <img src={cover} alt="Botanical illustration of Maya growing into separate branches supporting professional relationships." width={1536} height={1024} loading="eager" decoding="async" fetchPriority="high" />
+          <img src={cover} alt={coverDescription} width={1536} height={1024} loading="eager" decoding="async" fetchPriority="high" />
         </figure>
         <div className="scope-hero-bottom" aria-hidden="true"><span>Maya &amp; Petal · Project documents</span><span>{document.number} / {documentId.toUpperCase()}</span></div>
       </section>

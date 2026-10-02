@@ -1,8 +1,8 @@
 # Self-Improving Loop: Design and MVP Scope
 
-Status: **Complete integration draft, 1 October 2026.** The user requested a self-improving loop in the MVP in the “Access Architecture Document” chat. This document turns that direction into a bounded product and engineering proposal. Inclusion in the MVP is the recorded user direction; the specific schemas, thresholds, budgets and interface details below are proposed for review.
+Status: **Integration draft, 1 October 2026.** The bounded self-improving loop is included in the MVP. The schemas, thresholds, budgets, and interface details below are proposed for review.
 
-Review basis: the full text of the user-supplied *Self improving loop for the Petal MVP*, version 1.0, dated 1 October 2026, including sections 1–17; current documents 01–06; the engineering implementation blueprint; conversation notes; and the research chat's user direction. The [integration review](reviews/2026-10-01-self-improving-loop-review.md) records the conflicts, retained proposals and revisions. The supplied specification was reviewed as text; its original DOCX page layout and embedded diagram were not part of this review.
+The [integration review](reviews/2026-10-01-self-improving-loop-review.md) preserves source provenance and the rationale for reconciling this proposal with the existing design.
 
 ## 1. Purpose and meaning of improvement
 
@@ -23,7 +23,7 @@ The loop has four goals:
 
 A declining escalation rate, client praise, longer engagement or a model's own confidence is insufficient evidence of improvement. An appropriate unsupported-answer handoff is a successful authorized behavior.
 
-### 1.1 Three kinds of change
+### 1.1 Kinds of change
 
 | Kind | What changes | MVP treatment and authority |
 |---|---|---|
@@ -63,9 +63,9 @@ The pre-Petal Maya gate must demonstrate this full process with synthetic feedba
 - Promoting private client statements to knowledge shared across relationships.
 - Autonomous platform code, tool, evaluation-rubric or infrastructure modification.
 - Live experiments that send unapproved candidates to clients.
-- Voice, calls, custom document generation or other already deferred capabilities.
+- Capabilities deferred in the [Maya](02-product-requirements-and-mvp-scope.md) and [Petal](03-petal-product-requirements-and-mvp-scope.md) scope tables.
 
-The first loop runs through Maya's channel-independent test interface using synthetic interactions. Petal implementation then connects real feedback and the professional workspace. The loop adds a functional gate; it does not replace the Maya-first dependency, the 100-conversation capacity gate, or professional go-live checks.
+The first loop uses synthetic interactions in Maya’s channel-independent test interface; Petal then connects real feedback and workspace review. The [roadmap](05-implementation-roadmap-pilot-plan-and-launch-criteria.md) defines the delivery dependencies and release gates.
 
 ## 3. Placement in the architecture
 
@@ -389,7 +389,7 @@ Record the publication actually used for each eligible decision, actual outcome,
 
 Measure useful supported completion, correction rate/effort, appropriate and inappropriate escalations, missing-details turns, source correctness, permission denials, cost and latency. Always show denominators, sample sizes and unresolved outcomes. No observation can retroactively grant an action approval.
 
-Observe for at least seven days and 30 eligible turns, extending up to 21 days if needed. Review all target-topic cases and an independently selected sample of unaffected cases. Insufficient traffic remains explicit; the owner can keep or restore the version with that limitation recorded, but cannot report a measured improvement that the evidence does not show.
+Use the minimum duration and eligible-turn count declared in the [starting observation policy](/self-improving-loop#10-scheduling-limits-and-failure-behavior). Review all target-topic cases and an independently selected sample of unaffected cases. Insufficient traffic remains explicit; the owner can keep or restore the version with that limitation recorded, but cannot report a measured improvement that the evidence does not show.
 
 The owner reviews “retain,” “needs more evidence,” or “restore” recommendations. Restore selects earlier approved content that remains valid under current knowledge permissions and data lifecycle; it creates a new publication and applies current mutation/readiness barriers. It does not restore deleted private memory, revoked sources, permissions or old pending sends.
 
@@ -415,16 +415,7 @@ Use existing persona, knowledge, relationships, audit and work-publisher modules
 
 ### 12.2 Delivery sequence
 
-| Stage | Deliverable and evidence |
-|---|---|
-| Maya foundation | Add explicit feedback, signal/candidate records and source dependency invalidation while implementing existing persona lifecycle. |
-| Before Maya functional gate | Demonstrate a complete synthetic two-persona loop: detect, propose, test, reject or approve, explicitly publish, observe and restore; prove no cross-client/owner effects. |
-| After Maya gate, during Petal implementation | Connect canonical Petal outcomes, feedback UI, scoped evidence and review actions through the versioned API. |
-| Integrated readiness | Exercise race, recovery, deletion, stale-approval and budget failures; run 100 conversations with loop load and verify live-work isolation. |
-| Closed pilot | Guided professional enablement after policy/provider checks; inspect early candidates and monitor correction effort, adverse cases and cost. |
-| Pilot exit/limited launch | Review loop-specific evidence alongside existing privacy, delivery, recovery and service gates. |
-
-The prior late-November pilot-start target must be reforecast with this added work. The source estimated 17–23 incremental engineering days for one engineer **assuming persona lifecycle, runtime, authentication and case infrastructure already exist**, excluding professional review and observation. This workspace currently contains documentation and a landing frontend, not those implemented platform services. The source estimate therefore cannot establish the current delivery forecast; estimate dependencies and workstream integration first.
+The [roadmap’s loop work and gates](/implementation-roadmap#self-improving-loop-work-and-gates) assigns these modules to Maya foundation, functional validation, Petal integration, readiness, and the closed pilot. Estimate dependency and integration work before adopting an effort forecast; the persona lifecycle, runtime, authentication, and case infrastructure must exist before the loop can use them.
 
 ### 12.3 Required acceptance cases
 
@@ -452,11 +443,9 @@ The prior late-November pilot-start target must be reforecast with this added wo
 
 The Maya/evaluation workstream owns the loop and fixture coverage. Petal/WhatsApp owns canonical feedback and outcome delivery. Profile/workspace owns review usability. Platform quality/operations owns quota isolation, recovery and release evidence. The user remains the initial human integration and platform release owner; professionals retain persona approval authority.
 
-## 13. Research interpretation and document reconciliation
+## 13. Research interpretation
 
-The supplied specification provides a complete 17-section workflow, including bounded retrieval tuning, immutable candidates/reports, hidden fixtures, proposed thresholds/budgets, recoverable jobs and per-pilot-persona completion. Those elements are retained and mapped to the existing services. Its new release pointer/epoch and five-second dispatch token are replaced by the SDD's effective manifest, current validation and coordinated mutation barrier. A pre-change remote token cannot authorize a new dispatch claim after a completed standing change. Only an attempt atomically claimed before the hold is already in flight, under the existing disclosed boundary.
-
-Automatic content rollback is also replaced with automatic operational holds where needed and explicit owner restore. Proposed mining, fixture, budget, observation and retention defaults remain proposals pending measurement/policy review. The source's worked policy is illustrative and is not added to Petal's service knowledge. Its target-case scores must distinguish correct baseline escalation from increased useful answer coverage.
+The [integration review](reviews/2026-10-01-self-improving-loop-review.md) records source conflicts and resolutions. The operational design above uses the existing effective manifest and mutation barrier, owner-controlled restore, and measured review of proposed defaults.
 
 RRSI studies improvement of agent harnesses surrounding a frozen model and regularization against benchmark-specific overfitting. Its results do not establish that Maya's professional service behavior will improve, and it is not a selected MVP dependency. The applicable design lessons are bounded attributable edits, independent leakage screening, repeated baseline measurements, and cost-aware selection. [RRSI paper, version 2](https://arxiv.org/abs/2609.24972v2), [research project](https://regularized-rsi.com/).
 
@@ -464,26 +453,6 @@ Agent evaluations benefit from inspecting actual outcomes as well as transcripts
 
 Pi and Laya remain optional runtime/classification ideas from the prior blueprint. Neither is required to build this loop. A classifier or proposer may identify a gap; server-side authority and the professional decide what can become live.
 
-| Existing document | Required alignment |
-|---|---|
-| [01 — The Story](01-the-story.md) | Replace the “future version” description of proposing improvements with the bounded MVP direction; keep belief evolution deferred. |
-| [02 — Maya MVP Scope](02-product-requirements-and-mvp-scope.md) | Include discovery, tested candidates, owner publication and observation/restore in behavior and functional checks. |
-| [03 — Petal Product Requirements](03-petal-product-requirements-and-mvp-scope.md) | Include feedback and review in the private workspace; distinguish improvement approval from WhatsApp case directions. |
-| [04 — Technical Architecture](04-technical-architecture-and-engineering-guidelines.md) | Add loop ownership, scoped feed/review APIs, isolated evaluation and lifecycle requirements without selecting another vendor. |
-| [05 — Roadmap and Pilot Plan](05-implementation-roadmap-pilot-plan-and-launch-criteria.md) | Include loop evidence in Maya/integrated gates and reforecast the schedule. |
-| [06 — System Design](06-system-design-document.md) | Link loop records/contracts and the critical flow to existing idempotency, lifecycle, authority and readiness mechanisms. |
-| [Engineering implementation blueprint](engineering-implementation-blueprint.md) | Update the RRSI placement and target modules; the loop is MVP work, full RRSI-style autonomous code evolution is deferred. |
-| [Conversation notes](../conversation-notes.md) | Preserve earlier decisions as history and record the later MVP extension distinctly. |
-
-Landing-page copies of documents 01 and 02 must match the revised primary documents. Their pages import Markdown directly, so synchronized sources update the rendered text. The user's later website request adds this document at `/self-improving-loop`, with the three illustrations above and the existing temporary fallback cover.
-
 ## 14. Decisions to close before automatic runs or pilot
 
-- Review the resolved architectural choices and retrieval-review authority in the integration review; the source text comparison is complete.
-- Fix OpenAPI schemas, source-event mapping, candidate allowlist and dependency/invalidation records.
-- Approve fixture access policy, held-out splits, rubric calibration, uncertainty method and non-inferiority margins.
-- Measure provider cost/latency, set real token/monetary ceilings and verify that production mining follows selected provider terms.
-- Set improvement-artifact retention, private evidence permissions and deletion/backup exceptions before real-client use.
-- Validate professional enablement, sensitive approval/publish actions and the restore/readiness experience.
-- Estimate loop effort and reforecast the pilot start; decide operational observation thresholds before the gate.
-- Record measured acceptance results. This draft describes required behavior; it does not claim an implemented or validated self-improving system.
+The [shared decision register](/system-design#11-decisions-to-close-before-implementation-or-pilot) tracks the unresolved loop contract, fixture access, evaluation calibration, budgets, retention, enablement, review/restore, and observation decisions. The detailed proposals remain in sections 5–11 above. Record measured acceptance results before enabling automatic runs or widening pilot access; this draft does not claim an implemented or validated system.

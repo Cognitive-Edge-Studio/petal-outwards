@@ -1,16 +1,16 @@
 # Maya MVP Scope
 
-Status: Confirmed Session 2 product scope, extended on 1 October 2026 by the user's request to include a bounded self-improving loop in the MVP. Detailed loop design and operating parameters remain proposals; measured performance and pilot results require implementation evidence.
+Status: Confirmed MVP scope, including the bounded self-improving loop. Detailed loop design and operating parameters remain proposals; measured performance and pilot results require implementation evidence.
 
 ## Purpose and sequence
 
-Maya is a reusable persona system that can represent different people across separate relationships. The MVP establishes that foundation before Petal is implemented. Petal is its first planned application, and its product requirements will be documented in the next session. Petal's implementation can then use what Maya proves and adjust to what validation reveals.
+This scope defines Maya’s reusable persona foundation and the behavior it must prove before Petal implementation. The [Petal scope](/petal-mvp-scope) defines the application that uses it; the [roadmap](/implementation-roadmap#proposed-milestone-sequence) sets the build sequence and release gates.
 
 Maya starts as a reusable system with a small interface for configuring and testing personas, without a separate public launch. It should not depend on Petal's profiles, marketplace, or WhatsApp experience. The care, IELTS, and teaching examples in *The Story* show Maya's wider potential; they do not make specialized health or education workflows part of this MVP.
 
 ## MVP users and validation approach
 
-- Begin with text conversations. Voice messages follow in a later stage, then live calls. Neither voice stage is required for this Maya MVP or Petal's initial release.
+- Use text conversations for the validation scenarios below. Deferred capabilities are listed under “Outside this MVP.”
 - Validate Maya with two distinct personas and multiple private relationships for each, using a general professional scenario and a teaching scenario. These are validation cases, not separate products to launch.
 - Let the represented person configure, test, and approve their persona through the small interface; the project team may assist during the pilot.
 - Demonstrate correct use of approved knowledge, separation of relationship histories, enforcement of delegated permissions, human takeover, and a reviewable record of actions before Petal implementation.
@@ -34,7 +34,7 @@ The first Maya implementation must support:
 - Unknown answers: when approved information does not support a service fact, Maya says she cannot confirm it and hands the question to the owner rather than guessing.
 - Human handoff: when Maya needs review, she acknowledges the request promptly and pauses replies in that conversation. The owner can inspect the context, act, and explicitly return control to Maya. Maya must not send a competing reply while the owner has control.
 - A reviewable record of what Maya answered, proposed, shared, or escalated, and which persona configuration and authority applied.
-- A bounded self-improving loop: capture verified feedback, identify supported gaps, draft a small knowledge, instruction, or allowlisted persona retrieval change, and evaluate it against the current configuration. The represented person reviews the exact tested change and explicitly approves and publishes it; retrieval tuning also needs engineering review. Observe later outcomes and support restoring a still-valid earlier approved version. Private client facts cannot become general knowledge through this process. Document 07, Self-Improving Loop: Design and MVP Scope, defines the proposed mechanisms and gates.
+- A [bounded self-improving loop](/self-improving-loop): automatically propose and test an allowed change, then require the represented person to approve and explicitly publish its exact tested revision. Retrieval tuning also needs engineering review. Private client facts remain private; later outcomes inform retention or owner-controlled restore.
 
 The first validation can use the text-based testing interface without WhatsApp.
 
@@ -56,7 +56,7 @@ Test two distinct personas in general professional and teaching scenarios, with 
 - Applies only a published, owner-approved persona version in live conversations and can restore the previous version.
 - Completes a synthetic feedback-to-improvement cycle for both validation personas: a supported gap, bounded candidate, paired tests, explicit owner approval/publication, later use, observation decision, and restore exercise. Failed gates or stale evidence must block adoption; the test interface can prove the loop before Petal exists.
 
-The ambition to handle roughly 100 simultaneous conversations for one persona is a separate capacity gate before a Petal pilot. Functional behavior comes first; representative load testing and acceptable response times will be specified in the delivery plan. Neither gate prevents documenting Petal's product requirements in the next session.
+Functional validation is distinct from the pre-pilot capacity gate. The [roadmap](/implementation-roadmap#proposed-milestone-sequence) defines their sequencing; [System Design](/system-design#10-verification-and-release-evidence) specifies the required evidence.
 
 ## Outside this MVP
 
@@ -68,4 +68,4 @@ The ambition to handle roughly 100 simultaneous conversations for one persona is
 
 ## Relationship to Petal
 
-The next session will specify Petal's professional workspace, public profile, WhatsApp entry, client experience, and first-release boundaries. Those choices will remain distinct from Maya's reusable capabilities. Maya's functional validation is required before Petal implementation; the roughly 100-conversation capacity target is required before a Petal pilot.
+Petal adds the public profile, professional workspace, WhatsApp channels, and case inbox described in its [product scope](/petal-mvp-scope). Maya’s test interface must prove the behavior above without depending on those application features.

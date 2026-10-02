@@ -13,6 +13,8 @@ dist
 dist-ssr
 .playwright-cli/
 output/playwright/
+output/npm-cache/
+public/eudora/lottie/dotlottie-player.wasm
 *.local
 .env
 .env.*

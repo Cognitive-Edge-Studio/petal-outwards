@@ -12,6 +12,9 @@ import './story.css'
 const ScopePage = lazy(() => import('./ScopePage'))
 const DocumentPage = lazy(() => import('./DocumentPage'))
 const DeveloperDocsPage = lazy(() => import('./DeveloperDocsPage'))
+const EudoraCaseStudyPage = lazy(() => import('./EudoraCaseStudyPage'))
+const BuzyBuzzCaseStudyPage = lazy(() => import('./BuzyBuzzCaseStudyPage'))
+const ProfessionalCaseStudyPage = lazy(() => import('./ProfessionalCaseStudyPage'))
 const documentPages: Record<string, DocumentId> = {
   '/petal-mvp-scope': 'petal',
   '/technical-architecture': 'architecture',
@@ -46,14 +49,14 @@ function Chapter({ section, index }: { section: StorySection; index: number }) {
     return (
       <section id={section.id} className="chapter possibilities">
         <div className="page-width">
-          <div className="section-intro">{heading}<div className="intro-copy"><Blocks blocks={body.slice(0, 2)} /></div></div>
+          <div className="section-intro">{heading}<div className="intro-copy"><Blocks blocks={body.slice(0, 1)} /></div></div>
           <div className="possibility-grid">
-            {body.slice(2, 5).map((block, card) => {
+            {body.slice(1, 4).map((block, card) => {
               const Icon = icons[card]
               return <div className={`possibility-card possibility-${card + 1}`} key={card} data-reveal><div className="card-icon"><Icon size={26} strokeWidth={1.5} aria-hidden="true" /></div><StoryContent markdown={block} /></div>
             })}
           </div>
-          <div className="section-afterword"><Blocks blocks={body.slice(5)} /></div>
+          <div className="section-afterword"><Blocks blocks={body.slice(4)} /></div>
         </div>
       </section>
     )
@@ -196,6 +199,16 @@ function StoryPage() {
 
 function App() {
   const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  if (path === '/case-study/juriva' || path === '/case-study/wellora') {
+    const studyId = path === '/case-study/juriva' ? 'juriva' : 'wellora'
+    return <Suspense fallback={<div className="page-width route-loading" role="status">Opening case study…</div>}><ProfessionalCaseStudyPage studyId={studyId} /></Suspense>
+  }
+  if (path === '/case-study/buzybuzz') {
+    return <Suspense fallback={<div className="page-width route-loading" role="status">Opening BuzyBuzz case study…</div>}><BuzyBuzzCaseStudyPage /></Suspense>
+  }
+  if (path === '/case-study/eudora') {
+    return <Suspense fallback={<div className="page-width route-loading" role="status">Opening Eudora case study…</div>}><EudoraCaseStudyPage /></Suspense>
+  }
   if (path === '/developer-docs') {
     return <Suspense fallback={<div className="page-width route-loading" role="status">Opening developer docs…</div>}><DeveloperDocsPage /></Suspense>
   }
